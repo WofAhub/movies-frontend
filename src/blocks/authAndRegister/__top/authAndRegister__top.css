@@ -1,0 +1,20 @@
+.authAndRegister__top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+
+  width: 100%;
+
+  margin: 0 0 24px 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 450px) {
+  .authAndRegister__top {
+    gap: 50px;
+    align-items: center;
+
+    margin: 0 0 66px 0;
+  }
+}

@@ -1,0 +1,12 @@
+.moviesCard__duration {
+  color: #A0A0A0;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  margin: 0;
+  padding: 0;
+
+  grid-area: duration;
+}

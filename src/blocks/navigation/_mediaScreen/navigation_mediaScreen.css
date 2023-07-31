@@ -1,0 +1,39 @@
+@media screen and (max-width: 898px) {
+  .navigation_mediaScreen {
+    flex-direction: column;
+    position: absolute;
+    width: 67.708%;
+    height: 100vh;
+    top: 0;
+    left: 32.292%;
+    background-color: #FAFAFA;
+    transform: translateX(100%);
+
+    .navigation__box {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin: 159px 0 0 0;
+      gap: 28px;
+    }
+
+    .navigation__account {
+      margin: 0 0 70px 0;
+    }
+
+    .navigation__item {
+      color: #000;
+      text-align: center;
+      font-feature-settings: 'clig' off, 'liga' off;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+
+    .navigation__item_active {
+      border-bottom: 2px solid black;
+      padding-bottom: 5px;
+    }
+  }
+}

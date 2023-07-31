@@ -1,0 +1,32 @@
+.movies__button {
+  width: 25%;
+  height: 36px;
+  flex-shrink: 0;
+  border: 1px solid rgba(232, 232, 232, 1);
+  background-color: transparent;
+
+  color: #000;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  background-image: url(../../../images/movie.svg);
+  background-position: center;
+  background-size: 0;
+  background-repeat: no-repeat;
+
+  border-radius: 5px;
+
+  margin: 0 auto 159px auto;
+  padding: 0 0 0 0;
+  transition: all .2s ease-in-out;
+}
+
+.movies__button:hover {
+  color: transparent;
+  font-size: 1px;
+  background-size: 19px;
+  background-color: #3456F3;
+}

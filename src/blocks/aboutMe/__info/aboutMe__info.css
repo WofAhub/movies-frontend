@@ -1,0 +1,10 @@
+.aboutMe__info {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+
+  width: 52.632%;
+
+  margin: 0;
+  padding: 0;
+}

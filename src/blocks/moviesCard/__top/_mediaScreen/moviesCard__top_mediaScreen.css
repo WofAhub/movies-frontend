@@ -1,0 +1,6 @@
+@media screen and (max-width: 450px) {
+  .moviesCard__top_mediaScreen {
+    width: 90.667%;
+    grid-template-columns: 210px 30px;
+  }
+}

@@ -1,0 +1,23 @@
+.authAndRegister__box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 30.938vw;
+  height: 100vh;
+
+  gap: 16px;
+}
+
+@media screen and (max-width: 1150px) {
+  .authAndRegister__box{
+    width: 51.563vw;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .authAndRegister__box {
+    width: 81.250vw;
+    gap: 14px;
+  }
+}

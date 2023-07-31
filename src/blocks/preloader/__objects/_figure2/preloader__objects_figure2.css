@@ -1,0 +1,5 @@
+.preloader__objects_figure2 {
+  background-image: url(../../../../images/figure2.svg);
+  opacity: 0;
+  animation: sizeFigure .6s ease-in-out 2s infinite alternate;
+}

@@ -1,0 +1,24 @@
+.aboutProject__timeline-p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  font-size: calc(11px + 3 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  width: 100%;
+  height: 100%;
+  
+  background-color: #F2F2F2;
+
+  margin: 0;
+  padding: 0;
+}
+
+.aboutProject__timeline-p:first-of-type {
+  background-color: #3456F3;
+  color: white;
+}

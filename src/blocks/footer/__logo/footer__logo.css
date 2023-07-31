@@ -1,0 +1,11 @@
+.footer__logo {
+  text-align: right;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: calc(12px + 1 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  margin: 0;
+  padding: 0;
+}

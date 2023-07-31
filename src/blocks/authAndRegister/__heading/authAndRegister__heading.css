@@ -1,0 +1,14 @@
+.authAndRegister__heading {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  margin: 0;
+  padding: 0;
+
+}
+
+.authAndRegister__heading::after {
+  content: '!';
+}

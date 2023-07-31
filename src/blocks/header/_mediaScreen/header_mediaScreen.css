@@ -1,0 +1,10 @@
+@media screen and (max-width: 898px) {
+  .header_mediaScreen {
+    width: 100%;
+
+    .header__box {
+      width: 92.188%;
+    }
+  }
+
+}

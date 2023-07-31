@@ -1,0 +1,19 @@
+.registerOrLogin__regOrLog-btn {
+  text-decoration: none;
+
+  color: #3456F3;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 450px) {
+  .registerOrLogin__regOrLog-btn {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,29 @@
+.portfolio__link {
+  font-size: calc(18px + 12 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 400;
+  line-height: 166.667%;
+  letter-spacing: -1.2px;
+  text-decoration: none;
+
+  
+  background-image: url(../../../images/arrow.svg);
+  background-position: right;
+  background-position-y: 20px;
+  background-repeat: no-repeat;
+  background-size: auto;
+  
+  width: 100%;
+  min-height: 70px;
+
+  border-bottom: 1px solid #E8E8E8;
+
+  margin: 0;
+  padding: 0;
+
+  transition: all .2s ease-in-out;
+}
+
+.portfolio__link:hover {
+  background-image: url(../../../images/arrowBlue.svg);
+}

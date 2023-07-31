@@ -1,0 +1,31 @@
+.navTab__login {
+  content: '';
+
+  width: 76px;
+  height: 32px;
+
+  align-items: center;
+  justify-content: center;
+  
+  background-color: #3456F3;
+  color: #FFF;
+
+  background-image: url(../../../images/login.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0;
+
+  border-radius: 3px;
+
+  margin: 0;
+  padding: 0;
+
+  transition: all .2s ease-in-out;
+}
+
+.navTab__login:hover {
+  color: transparent;
+  font-size: 1px;
+  background-size: 19px;
+
+}

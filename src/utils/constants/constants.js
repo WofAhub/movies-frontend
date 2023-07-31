@@ -1,0 +1,3 @@
+export const LAPTOP_SCREEN_WIDTH = 1024;
+export const TABLET_SCREEN_WIDTH = 768;
+export const MOBILE_SCREEN_WIDTH = 480;

@@ -1,0 +1,32 @@
+.notFoundPage__back-btn {
+  cursor: pointer;
+  color: #3456F3;
+  text-align: center;
+  font-size: calc(12px + 2 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  width: 73px;
+  height: 20px;
+
+  background-color: transparent;
+
+  background-image: url(../../../images/arrow_back.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0;
+
+  border: none;
+
+  margin: 0;
+  padding: 0;
+
+  transition: all .2s ease-in-out;
+}
+
+.notFoundPage__back-btn:hover {
+  background-size: 19px;
+  font-size: 1px;
+  color: transparent;
+}

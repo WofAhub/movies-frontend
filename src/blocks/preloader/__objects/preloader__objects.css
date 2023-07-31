@@ -1,0 +1,23 @@
+.preloader__objects {
+  width: 65px;
+  height: 65px;
+
+  position: absolute;
+
+  background-repeat: no-repeat;
+  background-position: center;
+
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes sizeFigure {
+  from {
+    background-size: 0;
+    opacity: 0;
+  }
+  to {
+    background-size: 65px;
+    opacity: 1;
+  }
+}

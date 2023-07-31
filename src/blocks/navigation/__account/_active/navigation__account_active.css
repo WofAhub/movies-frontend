@@ -1,0 +1,6 @@
+.navigation__account_active {
+  background-color: #3456F3;
+  color: #F4F4F4;
+
+  pointer-events: none;
+}

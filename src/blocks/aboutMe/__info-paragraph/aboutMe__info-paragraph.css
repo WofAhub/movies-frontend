@@ -1,0 +1,8 @@
+.aboutMe__info-paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: 99px;
+
+  margin: 0;
+  padding: 0;
+}

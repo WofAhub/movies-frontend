@@ -1,0 +1,23 @@
+@media screen and (max-width: 898px) {
+  .profile_mediaScreen {
+    width: 53.385%;
+    gap: 96px;
+    padding: 172px 0 0 0;
+    .profile__buttons {
+      margin: 119px 0 0 0;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .profile_mediaScreen {
+    width: 81.25%;
+    gap: 80px;
+    padding: 0;
+    margin: auto 0 0 0;
+    .profile__buttons {
+      margin: 303px 0 0 0;
+      padding: 0 0 40px 0;
+    }
+  }
+}

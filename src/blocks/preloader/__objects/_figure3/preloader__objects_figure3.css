@@ -1,0 +1,5 @@
+.preloader__objects_figure3 {
+  background-image: url(../../../../images/figure3.svg);
+  opacity: 0;
+  animation: sizeFigure .6s ease-in-out 3s infinite alternate;
+}

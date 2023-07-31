@@ -1,0 +1,27 @@
+.profile__paragraph {
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  margin: 0;
+  padding: 0;
+}
+
+.profile__paragraph_nameLeft {
+  grid-area: nameLeft;
+}
+
+.profile__paragraph_nameRight {
+  grid-area: nameRight;
+  text-align: right;
+}
+
+.profile__paragraph_emailLeft{
+  grid-area: emailLeft;
+}
+
+.profile__paragraph_emailRight {
+  grid-area: emailRight;
+  text-align: right;
+}

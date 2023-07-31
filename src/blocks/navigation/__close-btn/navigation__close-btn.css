@@ -1,0 +1,16 @@
+.navigation__close-btn {
+  width: 44px;
+  height: 44px;
+  background-color: transparent;
+  position: relative;
+  background-image: url(../../../images/close.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.navigation__close-btn_position {
+  position: absolute;
+  top: 2%;
+  right: 3%;
+}

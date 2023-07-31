@@ -1,0 +1,8 @@
+@media screen and (max-width: 898px) {
+  .movies_mediaScreen {
+    width: 92.188%;
+
+    margin: 0;
+    padding: 0;
+  }
+}

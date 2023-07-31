@@ -1,0 +1,8 @@
+.moviesCard__thumbnail {
+  display: block;
+  width: 100%;
+  height: 203px;
+
+  margin: 0;
+  padding: 0;
+}

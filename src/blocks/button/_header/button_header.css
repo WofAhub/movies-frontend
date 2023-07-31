@@ -1,0 +1,25 @@
+.button_header {
+  display: flex;
+  flex-direction: column;
+  
+  border-radius: 20px;
+  
+  align-items: center;
+  justify-content: center;
+
+  width: 100px;
+  height: 32px;
+
+  background-color: #F4F4F4;
+  
+  margin: 0;
+  padding: 0;
+
+  transition: all .2s ease-in-out;
+}
+
+.button_header:hover {
+  background-color: #3456F3;
+  border-radius: 10px;
+  color: white;
+}

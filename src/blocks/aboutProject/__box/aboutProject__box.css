@@ -1,0 +1,11 @@
+.aboutProject__box {
+  display: grid;
+  grid-template-columns: fit-content(550px) fit-content(550px);
+  grid-template-rows: fit-content(24px) fit-content(40px);
+
+  column-gap: 40px;
+  row-gap: 26px;
+
+  margin: 0;
+  padding: 0;
+}

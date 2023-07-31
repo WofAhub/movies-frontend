@@ -1,0 +1,16 @@
+.moviesCard {
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+
+  margin: 0;
+  padding: 0;
+
+  transition: all .2s ease-in-out;
+}
+
+.moviesCard:hover {
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+}

@@ -1,0 +1,7 @@
+.profile__line {
+  border-bottom: 1px solid #E8E8E8;
+  grid-area: gridLine;
+
+  margin: 0;
+  padding: 0;
+}

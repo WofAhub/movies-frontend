@@ -1,0 +1,8 @@
+.aboutProject {
+  display: flex;
+  flex-direction: column;
+  gap: 110px;
+
+  margin: 70px 0 0 0;
+  padding: 0;
+}

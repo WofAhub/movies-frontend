@@ -1,0 +1,27 @@
+@media screen and (max-width: 898px) {
+  .aboutProject__timeline_mediaScreen {
+    .aboutProject__timeline-p {
+      font-size: calc(11px + 3 * (100vw / 768));
+    }
+
+    .aboutProject__underTimeline-p {
+      font-size: calc(11px + 3 * (100vw / 768));
+      font-weight: 400;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject__timeline_mediaScreen {
+
+    .aboutProject__timeline-p {
+      font-size: calc(11px + (3 + 3 * 0.7) * ((100vw - 320px) / 1280));
+    }
+
+    .aboutProject__underTimeline-p {
+      font-size: calc(11px + (3 + 3 * 0.7) * ((100vw - 320px) / 1280));
+    }
+
+  }
+
+}

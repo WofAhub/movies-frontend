@@ -1,0 +1,32 @@
+.moviesCard__button {
+  background-repeat: no-repeat;
+  background-position: center;
+
+  background-color: #F4F4F4;
+
+  width: 30px;
+  height: 30px;
+
+  border: 0;
+  border-radius: 100%;
+
+  cursor: pointer;
+
+  transition: all .2s ease-in-out;
+
+  margin: 0;
+  padding: 0;
+
+  grid-area: button;
+}
+
+.moviesCard__favorite-btn:hover {
+  background-color: #3456F3;
+  border-radius: 10px;
+}
+
+.moviesCard__deleteFromFavorite-btn:hover {
+  background-color: #EE3465;
+  border-radius: 10px;
+  background-image: url(../../../images/close_active.svg);
+}

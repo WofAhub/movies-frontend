@@ -1,0 +1,24 @@
+.techs__li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  list-style: none;
+
+  text-align: center;
+  font-size: calc(12px + 2 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.56px;
+  
+  background-color: #E8E8E8;
+  
+  border-radius: 10px;
+
+  min-width: 90px;
+  height: 60px;
+
+  margin: 0;
+  padding: 0;
+}

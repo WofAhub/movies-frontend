@@ -1,0 +1,10 @@
+.movies {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 140px);
+
+  gap: 80px;
+  
+  margin: 0;
+  padding: 0;
+}

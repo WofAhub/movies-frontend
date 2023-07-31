@@ -1,0 +1,9 @@
+.movies__box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+
+  margin: 0;
+  padding: 0;
+}

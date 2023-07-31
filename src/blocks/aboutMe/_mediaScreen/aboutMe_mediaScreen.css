@@ -1,0 +1,89 @@
+@media screen and (max-width: 898px) {
+  .aboutMe_mediaScreen {
+    min-height: 307px;
+
+    .aboutMe__heading {
+      font-size: 40px;
+      line-height: 100%;
+      letter-spacing: -1.6px;
+    }
+
+    .aboutMe__aboutAndDate {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 150%;
+    }
+
+    .aboutMe__info {
+      gap: 20px;
+    }
+
+    .aboutMe__info-top {
+      gap: 16px;
+    }
+
+    .aboutMe__student-img {
+      width: 255px;
+    }
+
+    .aboutMe__paragraph {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+    }
+
+    .aboutMe__info-paragraph {
+      gap: 69px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .aboutMe_mediaScreen {
+    flex-direction: column-reverse;
+    margin: 60px 0 0 0;
+    gap: 40px;
+
+    .aboutMe__student-img {
+      width: 292px;
+      height: 352px;
+      margin: 0 auto 0 auto;
+    }
+
+    .aboutMe__info {
+      width: 100%;
+      gap: 20px;
+    }
+
+    .aboutMe__info-top {
+      gap: 20px;
+    }
+
+    .aboutMe__heading {
+      font-size: calc(30px + (20 + 20 * 0.7) * ((100vw - 320px) / 1280));
+      line-height: normal;
+      letter-spacing: -1.2px;
+    }
+
+    .aboutMe__aboutAndDate {
+      font-size: calc(12px + (6 + 6 * 0.7) * ((100vw - 320px) / 1280));
+      line-height: 145.455%;
+    }
+
+    .aboutMe__paragraph {
+      font-size: calc(11px + (3 + 3 * 0.7) * ((100vw - 320px) / 1280));
+      line-height: 145.455%;
+    }
+
+    .aboutMe__info-paragraph {
+      gap: 40px;
+    }
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  .aboutMe__info-top {
+    gap: 40px;
+  }
+}

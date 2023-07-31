@@ -1,0 +1,16 @@
+.promo__heading {
+  width: 48.906%;
+  
+  font-size: calc(31px + 9 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  letter-spacing: -1.6px;
+
+  position: absolute;
+  top: 19.558%;
+  left: 5.469%;
+
+  margin: 0;
+  padding: 0;
+}

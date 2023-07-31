@@ -1,0 +1,15 @@
+.profile__grid {
+  display: grid;
+  width: 100%;
+
+  grid-template-areas: 
+  'nameLeft nameRight'
+  'gridLine gridLine'
+  'emailLeft emailRight';
+
+  column-gap: 0;
+  row-gap: 16px;
+
+  margin: 0 auto 0 auto;
+  padding: 0;
+}

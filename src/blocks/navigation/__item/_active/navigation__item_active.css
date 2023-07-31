@@ -1,0 +1,12 @@
+.navigation__item_active {
+  text-align: right;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  text-decoration: none;
+  color: #3456F3;
+
+  margin: 0;
+  padding: 0;
+}

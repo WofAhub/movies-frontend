@@ -1,0 +1,19 @@
+.searchForm__form {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+
+  max-width: 100%;
+
+  border: 1.5px solid rgba(170, 170, 170, 20%);
+  border-radius: 8px;
+
+  margin: 0;
+  padding: 0;
+
+  transition: all .2s ease-in-out;
+}
+
+.searchForm__form:hover {
+  border-color: #3456F3;
+}

@@ -1,0 +1,24 @@
+.authAndRegisterImputs__input {  
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  border: 1px solid transparent;
+
+  border-radius: 8px;
+  outline: none;
+
+  background-color: #F4F4F4;
+  
+  margin: 0;
+  padding: 15px;
+  transition: border .2s ease-in;
+}
+
+.authAndRegisterImputs__input:focus {
+  border: 1px solid #3456F3;
+  background-image: url(../../../images/Search__active.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+} 

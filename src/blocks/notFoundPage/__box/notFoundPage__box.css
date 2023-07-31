@@ -1,0 +1,8 @@
+.notFoundPage__box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  margin: 0;
+  padding: 0;
+}

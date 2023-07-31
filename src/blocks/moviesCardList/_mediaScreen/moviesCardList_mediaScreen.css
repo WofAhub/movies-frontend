@@ -1,0 +1,12 @@
+@media screen and (max-width: 898px) {
+  .moviesCardList_mediaScreen {
+    grid-template-columns: repeat(auto-fit, minmax(339px, 1fr));
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .moviesCardList_mediaScreen {
+    grid-template-columns: minmax(300px, 1fr);
+    row-gap: 16px;
+  }
+}

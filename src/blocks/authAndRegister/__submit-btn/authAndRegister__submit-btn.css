@@ -1,0 +1,23 @@
+.authAndRegister__submit-btn {
+  width: 100%;
+  height: 45px;
+
+  color: #FFF;
+  text-align: center;
+  font-size: calc(12px + 2 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  cursor: pointer;
+
+  margin: 70px 0 0 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 450px) {
+  .authAndRegister__submit-btn {
+    font-size: calc(12px + (2 + 2 * 0.7) * ((100vw - 320px) / 1280));
+    margin: 160px 0 0 0;
+  }
+}

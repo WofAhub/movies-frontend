@@ -1,0 +1,22 @@
+@media screen and (max-width: 898px) {
+.notFoundPage_mediaScreen {
+  .notFoundPage__heading {
+    font-size: calc(80px + 60 * (100vw / 768));
+  }
+  .notFoundPage__paragraph {
+    font-size: calc(12px + 4 * (100vw / 1280));
+  }
+}
+}
+
+@media screen and (max-width: 450px) {
+  .notFoundPage_mediaScreen {
+    gap: 284px;
+    .notFoundPage__heading {
+      font-size: calc(80px + (60 + 60 * 0.7) * ((100vw - 320px) / 1280));
+    }
+    .notFoundPage__paragraph {
+      font-size: calc(12px + (4 + 4 * 0.7) * ((100vw - 320px) / 1280));
+    }
+  }
+  }

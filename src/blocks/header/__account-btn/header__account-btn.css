@@ -1,0 +1,29 @@
+.header__account-btn {
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 32px;
+
+  background-color: #F4F4F4;
+
+  border: none;
+  border-radius: 20px;
+
+  margin: 0;
+  padding: 0;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.header__account-btn:hover {
+background-color: #EDEDED;
+}

@@ -1,0 +1,12 @@
+.navTab_item {
+  display: flex;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 133.333%;
+  
+  text-decoration: none;
+
+  margin: 0;
+  padding: 0;
+}

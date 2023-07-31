@@ -1,0 +1,13 @@
+.aboutProject__timeline {
+  display: grid;
+  grid-template-columns: minmax(100px, 20%) minmax(184px, 1fr);
+  grid-template-rows: minmax(36px, 35px);
+
+  justify-content: center;
+  align-items: center;
+
+  row-gap: 14px;
+
+  margin: 0;
+  padding: 0;
+}

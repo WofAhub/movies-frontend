@@ -1,0 +1,10 @@
+.moviesCardList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(364px, 1fr));
+  
+  column-gap: 24px;
+  row-gap: 30px;
+
+  margin: 0;
+  padding: 0;
+}

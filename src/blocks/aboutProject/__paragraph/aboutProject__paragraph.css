@@ -1,0 +1,9 @@
+.aboutProject__paragraph {
+  font-size: calc(11px + 3 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 400;
+  line-height: 142.857%;
+
+  margin: 0;
+  padding: 0;
+}

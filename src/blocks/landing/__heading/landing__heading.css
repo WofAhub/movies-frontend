@@ -1,0 +1,10 @@
+.landing__heading {
+  font-size: calc(18px + 4 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+
+  margin: 0 0 23px 0;
+  padding: 0;
+}

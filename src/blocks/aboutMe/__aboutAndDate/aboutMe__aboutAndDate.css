@@ -1,0 +1,9 @@
+.aboutMe__aboutAndDate {
+  font-size: calc(11px + 7 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+
+  margin: 0;
+  padding: 0;
+}

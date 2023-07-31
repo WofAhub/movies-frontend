@@ -1,0 +1,15 @@
+.authAndRegisterImputs__errorMessage {
+  display: block;
+  position: absolute;
+  bottom: -21px;
+  
+
+  color: #EE3465;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  margin: 0;
+  padding: 0;
+}

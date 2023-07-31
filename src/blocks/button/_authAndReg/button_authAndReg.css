@@ -1,0 +1,22 @@
+.button_authAndReg {
+  background-color: #3456F3;
+  color: #fff;
+
+  background-image: url(../../../images/req.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0;
+
+  border: none;
+  border-radius: 3px;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.button_authAndReg:hover {
+  color: transparent;
+  font-size: 1px;
+  background-color: #2644CB;
+  border-radius: 10px;
+  background-size: 19px;
+}

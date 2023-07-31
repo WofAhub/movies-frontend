@@ -1,0 +1,11 @@
+@media screen and (max-width: 898px) {
+  .main__box_mediaScreen {
+    gap: 90px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .main__box_mediaScreen {
+    gap: 70px;
+  }
+}

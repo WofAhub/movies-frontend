@@ -1,0 +1,13 @@
+@media screen and (max-width: 898px) {
+  .aboutProject_mediaScreen {
+    margin: 70px 0 0 0;
+    gap: 93px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject_mediaScreen {
+    margin: 60px 0 0 0;
+    gap: 60px;
+  }
+}

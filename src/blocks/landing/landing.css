@@ -1,0 +1,9 @@
+.landing {
+  display: flex;
+  flex-direction: column;
+
+  width: 89.063%;
+
+  margin: 0 auto;
+  padding: 0;
+}

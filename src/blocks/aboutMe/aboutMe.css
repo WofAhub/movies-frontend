@@ -1,0 +1,8 @@
+.aboutMe {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 30px;
+
+  margin: 66px 0 0 0;
+  padding: 0;
+}

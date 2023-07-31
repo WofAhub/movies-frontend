@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+
+  width: 89.063%;
+
+  margin: 0 auto;
+  padding: 0 0 20px 0;
+}

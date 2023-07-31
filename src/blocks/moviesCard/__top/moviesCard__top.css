@@ -1,0 +1,16 @@
+.moviesCard__top {
+  display: grid;
+  width: 92.308%;
+
+  align-items: center;
+  justify-content: space-between;
+
+  grid-template-areas: 
+  'heading button'
+  'duration button';
+
+  row-gap: 9px;
+
+  padding: 14px 0 14px 0;
+  margin: 0 auto;
+}

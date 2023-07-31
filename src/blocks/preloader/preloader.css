@@ -1,0 +1,21 @@
+.preloader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(250, 250, 250, 0.20);
+  backdrop-filter: blur(5px);
+
+  position: fixed;
+
+  width: 100%;
+  height: 100%;
+
+  gap: 50px;
+
+  margin: auto;
+  padding: 0;
+
+  z-index: 4;
+}

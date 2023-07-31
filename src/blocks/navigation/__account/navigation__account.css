@@ -1,0 +1,25 @@
+.navigation__account {
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 114.286%;
+
+  background-image: url(../../../images/person.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0;
+
+  margin: 0;
+  padding: 0;
+
+  transition: all .2s ease-in-out;
+}
+
+.navigation__account:hover {
+  color: transparent;
+  font-size: 1px;
+  background-size: 19px;
+}

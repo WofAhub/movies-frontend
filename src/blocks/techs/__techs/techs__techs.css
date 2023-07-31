@@ -1,0 +1,11 @@
+.techs__techs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(84px,min-content));
+  gap: 10px;
+  justify-content: center;
+
+  width: 100%;
+
+  margin: 100px auto 0 auto;
+  padding: 0;
+}

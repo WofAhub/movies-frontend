@@ -1,0 +1,21 @@
+@media screen and (max-width: 898px) {
+  .landing_mediaScreen {
+    width: 86.979%;
+
+    .landing__heading {
+      font-size: calc(18px + 4 * (100vw / 768));
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .landing_mediaScreen {
+    width: 91.25%;
+
+    .landing__heading {
+      font-size: calc(18px + (4 + 4 * 0.7) * ((100vw - 320px) / 1280));
+      margin: 0 0 28px 0;
+    }
+  }
+
+}

@@ -1,0 +1,15 @@
+.promo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  width: 100%;
+  min-height: 634px;
+
+  position: relative;
+
+  background-color: #DDDEE3;
+
+  margin: 0;
+  padding: 0;
+}

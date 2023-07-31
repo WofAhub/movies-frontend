@@ -1,0 +1,13 @@
+.notFoundPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  gap: 184px;
+  
+  margin: auto;
+  padding: 0;
+}

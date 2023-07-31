@@ -1,0 +1,12 @@
+.authAndRegisterImputs__fieldset {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+
+  border: none;
+
+  margin: 0;
+  padding: 0;
+}

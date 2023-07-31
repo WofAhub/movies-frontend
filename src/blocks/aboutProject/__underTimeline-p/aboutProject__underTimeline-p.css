@@ -1,0 +1,11 @@
+.aboutProject__underTimeline-p {
+  color: #A0A0A0;
+  text-align: center;
+  font-size: calc(11px + 3 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 500;
+  line-height: 121.429%;
+
+  margin: 0;
+  padding: 0;
+}
