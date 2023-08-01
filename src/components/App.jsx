@@ -13,39 +13,42 @@ import Main from './Main';
 import Movies from './Movies';
 import NotFoundPage from './NotFoundPage';
 import SavedMovies from './SavedMovies';
-import Preloader from './Preloader';
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [savedMovies, setSavedMovies] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [userData, setUserData] = useState({});
-  const [currentUser, setCurrentUser] = useState({});
+  // const [savedMovies, setSavedMovies] = useState(false);
+  // const [isloading, setLoading] = useState(false);
+  // const [userData, setUserData] = useState({});
+  const [currentUser, setCurrentUser] = useState({
+    _id: '',
+    email: '',
+    name: '',
+  });
   const navigate = useNavigate();
 
-  // проверка токена
-  function checkToken() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      mainApi
-        .checkToken(token)
-        .then((res) => {
-          if (res.data) {
-            setUserData(res.data.email);
-            setLoggedIn(true);
-            navigate('/', { replace: true });
-          }
-        })
-        .catch((err) => {
-          console.log(`Ошибка в checkToken, в App: ${err.status}`);
-        });
-    }
-  }
-  useEffect(() => {
-    checkToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // // проверка токена
+  // function checkToken() {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     mainApi
+  //       .checkToken(token)
+  //       .then((res) => {
+  //         if (res.data) {
+  //           setUserData(res.data.email);
+  //           setLoggedIn(true);
+  //           navigate('/', { replace: true });
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(`Ошибка в checkToken, в App: ${err.status}`);
+  //       });
+  //   }
+  // }
+  // useEffect(() => {
+  //   checkToken();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   // логин
   function login({ email, password }) {
@@ -53,7 +56,10 @@ function App() {
       .login(email, password)
       .then((res) => {
         if (res.token) {
-          console.log(res, 'Это res из login в App.jsx')
+          console.log(res, 'Это res из login в App.jsx');
+          localStorage.setItem('token', res.token);
+          setLoggedIn(true);
+          navigate('/movies', { replace: true });
         }
       })
   };
@@ -100,7 +106,7 @@ function App() {
           <Route
             path='/movies'
             element={
-              <ProtectedRoute loggedIn={loggedIn} loading={loading}>
+              <ProtectedRoute loggedIn={loggedIn}>
                 <Movies />
               </ProtectedRoute>
             }
@@ -108,7 +114,7 @@ function App() {
           <Route
             path='/saved-movies'
             element={
-              <ProtectedRoute loggedIn={loggedIn} loading={loading}>
+              <ProtectedRoute loggedIn={loggedIn}>
                 <SavedMovies />
               </ProtectedRoute>
             }
@@ -116,7 +122,7 @@ function App() {
           <Route
             path='/profile'
             element={
-              <ProtectedRoute loggedIn={loggedIn} loading={loading}>
+              <ProtectedRoute loggedIn={loggedIn}>
                 <Profile />
               </ProtectedRoute>
             }
@@ -127,16 +133,10 @@ function App() {
               <NotFoundPage />
             }
           />
-          <Route
-            path='/preloader'
-            element={
-              <Preloader />
-            }
-          />
         </Routes>
       </div >
     </CurrentUserContext.Provider >
-  );
+  )
 }
 
 export default App;

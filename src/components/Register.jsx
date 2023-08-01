@@ -1,11 +1,28 @@
-import React from 'react';
-import AuthAndRegister from './AuthAndRegister';
+import { React } from 'react';
 import { Link } from "react-router-dom";
 
-function Register() {
+import AuthAndRegister from './AuthAndRegister';
+import useFormAndValidation from '../hooks/useFormAndValidation';
+
+function Register({ onRegister }) {
+
+  const { values, handleChange, errors, isValid } = useFormAndValidation({
+    email: '',
+    password: '',
+    name: '',
+  });
+
+  // подтверждение
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onRegister(values);
+  }
+
   return (
     <AuthAndRegister
-      authAndRegisterHeading={'Добро пожаловать!'}
+      authAndRegisterHeading={'Добро пожаловать'}
+      onSubmit={handleSubmit}
+      isValid={isValid}
       authAndRegisterImputs={
         <>
           <fieldset className='authAndRegisterImputs__fieldset'>
@@ -16,9 +33,15 @@ function Register() {
               id='name'
               name='name'
               type='name'
+              minLength='2'
+              maxLength='40'
+              className={errors.name ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
+              placeholder='Ваше имя'
+              value={values.name}
+              onChange={handleChange}
               required
-              className='authAndRegisterImputs__input'
             />
+            <span className='authAndRegisterImputs__errorMessage'>{errors.name}</span>
           </fieldset>
           <fieldset className='authAndRegisterImputs__fieldset'>
             <label htmlFor='email' className='authAndRegisterImputs__label'>
@@ -28,9 +51,13 @@ function Register() {
               id='email'
               name='email'
               type='email'
+              className={errors.email ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
+              placeholder='Ваш e-mail'
+              value={values.email}
+              onChange={handleChange}
               required
-              className='authAndRegisterImputs__input'
             />
+            <span className='authAndRegisterImputs__errorMessage'>{errors.email}</span>
           </fieldset>
           <fieldset className='authAndRegisterImputs__fieldset'>
             <label htmlFor='password' className='authAndRegisterImputs__label'>
@@ -40,10 +67,13 @@ function Register() {
               id='password'
               name='password'
               type='password'
+              className={errors.password ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
+              placeholder='Придумайте надёжный пароль'
+              value={values.password}
+              onChange={handleChange}
               required
-              className='authAndRegisterImputs__input'
             />
-            <span className='authAndRegisterImputs__errorMessage'>Что-то не так</span>
+            <span className='authAndRegisterImputs__errorMessage'>{errors.password}</span>
           </fieldset>
         </>
       }

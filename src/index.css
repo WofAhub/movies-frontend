@@ -11,6 +11,7 @@
 @import url(./blocks/authAndRegister/__top/authAndRegister__top.css);
 @import url(./blocks/authAndRegister/__form/authAndRegister__form.css);
 @import url(./blocks/authAndRegister/__input/authAndRegisterImputs__input.css);
+@import url(./blocks/authAndRegister/__input/_error/authAndRegisterImputs__input_error.css);
 @import url(./blocks/authAndRegister/__label/authAndRegisterImputs__label.css);
 @import url(./blocks/authAndRegister/__submit-btn/authAndRegister__submit-btn.css);
 @import url(./blocks/authAndRegister/__fieldset/authAndRegisterImputs__fieldset);
@@ -27,6 +28,7 @@
 @import url(./blocks/button/_header/button_header.css);
 @import url(./blocks/button/_authAndReg/button_authAndReg.css);
 @import url(./blocks/button/_hover/button_hover.css);
+@import url(./blocks/button/_authAndReg/_error/button_authAndReg_error.css);
 
 /* header */
 @import url(./blocks/header/header.css);

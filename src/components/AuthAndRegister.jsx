@@ -7,6 +7,7 @@ function AuthAndRegister({
   authAndRegisterBtnSubmit,
   registerOrLogin,
   onSubmit,
+  isValid,
 }) {
   return (
     <section className='authAndRegister'>
@@ -17,7 +18,7 @@ function AuthAndRegister({
         </div>
         <form className='authAndRegister__form' onSubmit={onSubmit}>
           {authAndRegisterImputs}
-          <button type='submit' className='authAndRegister__submit-btn button_authAndReg'>{authAndRegisterBtnSubmit}</button>
+          <button type='submit' className={isValid ? 'authAndRegister__submit-btn button_authAndReg' : 'authAndRegister__submit-btn button_authAndReg button_authAndReg_error'}>{authAndRegisterBtnSubmit}</button>
         </form>
         {registerOrLogin}
       </div>
