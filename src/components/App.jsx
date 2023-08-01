@@ -35,7 +35,7 @@ function App() {
   //       .checkToken(token)
   //       .then((res) => {
   //         if (res.data) {
-  //           setUserData(res.data.email);
+  //           setCurrentUser(res._id, res.email, res.name);
   //           setLoggedIn(true);
   //           navigate('/', { replace: true });
   //         }
@@ -50,19 +50,19 @@ function App() {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
-  // логин
-  function login({ email, password }) {
-    mainApi
-      .login(email, password)
-      .then((res) => {
-        if (res.token) {
-          console.log(res, 'Это res из login в App.jsx');
-          localStorage.setItem('token', res.token);
-          setLoggedIn(true);
-          navigate('/movies', { replace: true });
-        }
-      })
-  };
+  // // логин
+  // function login({ email, password }) {
+  //   mainApi
+  //     .login(email, password)
+  //     .then((res) => {
+  //       if (res.token) {
+  //         console.log(res, 'Это res из login в App.jsx');
+  //         localStorage.setItem('token', res.token);
+  //         setLoggedIn(true);
+  //         navigate('/movies', { replace: true });
+  //       }
+  //     })
+  // };
 
   // регистрация
   function register({ name, email, password }) {
@@ -85,7 +85,7 @@ function App() {
             path='/sign-in'
             element={
               <Login
-                onLogin={login}
+              // onLogin={login}
               />
             }
           />
