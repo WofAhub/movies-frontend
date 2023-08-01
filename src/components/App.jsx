@@ -73,6 +73,23 @@ function App() {
       })
   };
 
+  // логин
+  function login({ email, password }) {
+    mainApi
+      .login(email, password)
+      .then((data) => {
+        if (data.token) {
+          console.log(data, "Это res из login в App.jsx")
+          localStorage.setItem('token', data.token);
+          setLoggedIn(true);
+          navigate('/movies', { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка в App, loginUser: ${err}`);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser || ''}>
       <div className='app'>
@@ -81,7 +98,7 @@ function App() {
             path='/sign-in'
             element={
               <Login
-              // onLogin={login}
+                onLogin={login}
               />
             }
           />
