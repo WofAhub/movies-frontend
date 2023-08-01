@@ -3,7 +3,7 @@ import { React, useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ProtectedRoute from './ProtectedRoute';
-import { mainApi } from '../utils/MainApi';
+import * as mainApi from '../utils/MainApi';
 
 // модули
 import Register from './Register';
@@ -20,11 +20,7 @@ function App() {
   // const [savedMovies, setSavedMovies] = useState(false);
   // const [isloading, setLoading] = useState(false);
   // const [userData, setUserData] = useState({});
-  const [currentUser, setCurrentUser] = useState({
-    _id: '',
-    email: '',
-    name: '',
-  });
+  const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
 
   // // проверка токена
