@@ -13,7 +13,6 @@ import Main from './Main';
 import Movies from './Movies';
 import NotFoundPage from './NotFoundPage';
 import SavedMovies from './SavedMovies';
-import Header from './Header';
 import Navigation from './Navigation';
 import NavTab from './NavTab';
 

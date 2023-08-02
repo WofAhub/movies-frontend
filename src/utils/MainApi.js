@@ -4,15 +4,7 @@ import {
   SIGIN,
   USERS_ME,
 } from './constants/constants';
-
-// проверка ответа с сервера
-function checkAnswerFromServer(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    return Promise.reject(`Ошибка: ${res.status}`);
-  }
-}
+import { checkAnswerFromServer } from './function/function';
 
 // регистрация
 export const register = (name, email, password) => {
