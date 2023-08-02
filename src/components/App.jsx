@@ -90,6 +90,20 @@ function App() {
       });
   }
 
+  // получаю и устанавливаю данные пользователя, когда проходит логие
+  React.useEffect(() => {
+    if (loggedIn) {
+      mainApi
+        .getCurrentUser()
+        .then((res) => {
+          setCurrentUser(res.data);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err.status}`);
+        });
+    }
+  }, [loggedIn]);
+
   return (
     <CurrentUserContext.Provider value={currentUser || ''}>
       <div className='app'>
