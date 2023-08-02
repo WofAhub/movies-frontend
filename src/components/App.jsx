@@ -100,12 +100,12 @@ function App() {
       <div className='app'>
         <Routes>
           <Route
-            path="*"
+            path="/"
             element={
               loggedIn ? (
                 <Navigate to='/movies' replace />
               ) : (
-                <Navigate to="/sign-up" replace />
+                <Navigate to='/sign-up' replace />
               )
             }
           />
