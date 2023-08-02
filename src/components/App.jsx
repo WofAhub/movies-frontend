@@ -103,9 +103,9 @@ function App() {
             path="/"
             element={
               loggedIn ? (
-                <Navigate to='/movies' replace />
-              ) : (
                 <Navigate to='/sign-up' replace />
+              ) : (
+                <Navigate to='/movies' replace />
               )
             }
           />
