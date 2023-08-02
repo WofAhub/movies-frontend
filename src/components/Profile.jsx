@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Profile() {
+function Profile({ logout }) {
 
   const currentUserContext = useContext(CurrentUserContext);
 
@@ -20,8 +20,8 @@ function Profile() {
           <p className='profile__paragraph profile__paragraph_emailRight'>{currentUserContext.email}</p>
         </div>
         <div className='profile__buttons'>
-          <button className='profile__button button'>Редактировать</button>
-          <button className='profile__button button'>Выйти из аккаунта</button>
+          <button type='button' className='profile__button button'>Редактировать</button>
+          <button type='button' onClick={logout} className='profile__button button'>Выйти из аккаунта</button>
         </div>
       </section>
     </>

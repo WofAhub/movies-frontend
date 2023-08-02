@@ -17,9 +17,7 @@ import SavedMovies from './SavedMovies';
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
-  // const [savedMovies, setSavedMovies] = useState(false);
   // const [isloading, setLoading] = useState(false);
-  // const [userData, setUserData] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
 
@@ -74,6 +72,13 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка в App, loginUser: ${err}`);
       });
+  }
+
+  // логАут
+  function logOut() {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    navigate('/sign-in', { replace: true });
   }
 
   // получаю и устанавливаю данные пользователя, когда проходит логин
@@ -138,8 +143,9 @@ function App() {
             path='/profile'
             element={
               <ProtectedRoute
-                loggedIn={loggedIn}
                 element={Profile}
+                loggedIn={loggedIn}
+                logout={logOut}
               />
             }
           />
