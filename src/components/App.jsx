@@ -133,25 +133,28 @@ function App() {
           <Route
             path='/movies'
             element={
-              <ProtectedRoute loggedIn={loggedIn}>
-                <Movies />
-              </ProtectedRoute>
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                element={Movies}
+              />
             }
           />
           <Route
             path='/saved-movies'
             element={
-              <ProtectedRoute loggedIn={loggedIn}>
-                <SavedMovies />
-              </ProtectedRoute>
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                element={SavedMovies}
+              />
             }
           />
           <Route
             path='/profile'
             element={
-              <ProtectedRoute loggedIn={loggedIn}>
-                <Profile />
-              </ProtectedRoute>
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                element={Profile}
+              />
             }
           />
           <Route
