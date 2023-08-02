@@ -19,7 +19,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   // const [savedMovies, setSavedMovies] = useState(false);
   // const [isloading, setLoading] = useState(false);
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ function App() {
         .checkToken(token)
         .then((res) => {
           if (res.data) {
-            setUserData(res.data.name, res.data.email);
+            setCurrentUser(res.data);
             setLoggedIn(true);
             navigate('/movies', { replace: true });
           }
@@ -60,13 +60,12 @@ function App() {
   };
 
   // логин
-  function login({ name, email, password }) {
+  function login({ email, password }) {
     mainApi
-      .login(name, email, password)
+      .login(email, password)
       .then((data) => {
         if (data.token) {
           console.log(data, "Это res из login в App.jsx")
-          setUserData(email, name);
           localStorage.setItem('token', data.token);
           setLoggedIn(true);
           navigate('/movies', { replace: true });
@@ -82,8 +81,8 @@ function App() {
     if (loggedIn) {
       mainApi
         .getCurrentUser()
-        .then((res) => {
-          setCurrentUser(res.data);
+        .then((user) => {
+          setCurrentUser(user);
         })
         .catch((err) => {
           console.log(`Ошибка: ${err.status}`);
@@ -141,7 +140,6 @@ function App() {
               <ProtectedRoute
                 loggedIn={loggedIn}
                 element={Profile}
-                userData={userData}
               />
             }
           />
