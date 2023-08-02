@@ -19,7 +19,6 @@ import NavTab from './NavTab';
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
-  // const [isloading, setLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
 
@@ -31,7 +30,6 @@ function App() {
         .checkToken(token)
         .then((res) => {
           if (res.data) {
-            setCurrentUser(res.data);
             setLoggedIn(true);
             navigate('/movies', { replace: true });
           }

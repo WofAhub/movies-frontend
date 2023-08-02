@@ -55,6 +55,7 @@ export const checkToken = (token) => {
 export const getCurrentUser = () => {
   const token = localStorage.getItem('token');
   return fetch(`${BASE_URL}${USERS_ME}`, {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
