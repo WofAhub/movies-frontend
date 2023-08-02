@@ -53,3 +53,16 @@ export const checkToken = (token) => {
       return checkAnswerFromServer(res)
     })
 };
+
+// получаю информацию о пользователе
+export const getCurrentUser = () => {
+  return fetch(`${BASE_URL}/users/me`, {
+    headers: {
+      'Accept': 'application/json',
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
+};
