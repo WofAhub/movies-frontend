@@ -1,6 +1,6 @@
 // база
 import { React, useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ProtectedRoute from './ProtectedRoute';
 import * as mainApi from '../utils/MainApi';
@@ -156,7 +156,11 @@ function App() {
           <Route
             path='*'
             element={
-              <NotFoundPage />
+              loggedIn ? (
+                <Navigate to='/movies' replace />
+              ) : (
+                <Navigate to='/sign-up' replace />
+              )
             }
           />
         </Routes>
