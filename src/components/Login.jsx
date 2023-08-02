@@ -36,6 +36,7 @@ function Login({ onLogin }) {
               placeholder='Ваш e-mail'
               value={values.email}
               onChange={handleChange}
+              autocomplete="email"
               required
             />
             <span className='authAndRegisterImputs__errorMessage'>{errors.email}</span>
@@ -52,6 +53,7 @@ function Login({ onLogin }) {
               value={values.password}
               onChange={handleChange}
               placeholder='Пароль'
+              autocomplete="current-password"
               required
             />
             <span className='authAndRegisterImputs__errorMessage'>{errors.password}</span>
