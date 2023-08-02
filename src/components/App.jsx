@@ -1,6 +1,6 @@
 // база
 import { React, useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ProtectedRoute from './ProtectedRoute';
 import * as mainApi from '../utils/MainApi';
@@ -99,6 +99,16 @@ function App() {
     <CurrentUserContext.Provider value={currentUser || ''}>
       <div className='app'>
         <Routes>
+          <Route
+            path="*"
+            element={
+              loggedIn ? (
+                <Navigate to='/movies' replace />
+              ) : (
+                <Navigate to="/sign-up" replace />
+              )
+            }
+          />
           <Route
             path='/sign-in'
             element={

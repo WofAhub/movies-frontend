@@ -5,7 +5,9 @@ function Header({
   headerNavigation,
   headerNavTab,
   burgerButton,
-}) {
+}) 
+
+{
   return (
     <header className='header header_burger header_mediaScreen'>
       <div className='header__box'>
