@@ -56,10 +56,12 @@ export const checkToken = (token) => {
 
 // получаю информацию о пользователе
 export const getCurrentUser = () => {
+  const token = localStorage.getItem('token');
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
       'Accept': 'application/json',
       "Content-Type": "application/json",
+      'Authorization': `Bearer ${token}`
     },
   })
     .then((res) => {

@@ -23,42 +23,28 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
 
-  // // проверка токена
-  // function checkToken() {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     mainApi
-  //       .checkToken(token)
-  //       .then((res) => {
-  //         if (res.data) {
-  //           setCurrentUser(res._id, res.email, res.name);
-  //           setLoggedIn(true);
-  //           navigate('/', { replace: true });
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(`Ошибка в checkToken, в App: ${err.status}`);
-  //       });
-  //   }
-  // }
-  // useEffect(() => {
-  //   checkToken();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // // логин
-  // function login({ email, password }) {
-  //   mainApi
-  //     .login(email, password)
-  //     .then((res) => {
-  //       if (res.token) {
-  //         console.log(res, 'Это res из login в App.jsx');
-  //         localStorage.setItem('token', res.token);
-  //         setLoggedIn(true);
-  //         navigate('/movies', { replace: true });
-  //       }
-  //     })
-  // };
+  // проверка токена
+  function checkToken() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      mainApi
+        .checkToken(token)
+        .then((res) => {
+          if (res.data) {
+            setCurrentUser(res._id, res.email, res.name);
+            setLoggedIn(true);
+            navigate('/movies', { replace: true });
+          }
+        })
+        .catch((err) => {
+          console.log(`Ошибка в checkToken, в App: ${err.status}`);
+        });
+    }
+  }
+  useEffect(() => {
+    checkToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // регистрация
   function register({ name, email, password }) {
