@@ -11,7 +11,7 @@ function Profile() {
     <>
       <Navigation />
       <section className='profile profile_mediaScreen'>
-        <h1 className='authAndRegister__heading'>Привет,{currentUserContext.name}</h1>
+        <h1 className='authAndRegister__heading'>Привет, {currentUserContext.name}</h1>
         <div className='profile__grid'>
           <p className='profile__paragraph profile__paragraph_nameLeft'>Имя</p>
           <p className='profile__paragraph profile__paragraph_nameRight'>{currentUserContext.name}</p>
