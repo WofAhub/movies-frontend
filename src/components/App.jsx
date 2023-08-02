@@ -31,7 +31,7 @@ function App() {
         .checkToken(token)
         .then((res) => {
           if (res.data) {
-            setCurrentUser(res._id, res.email, res.name);
+            setCurrentUser(res.data);
             setLoggedIn(true);
             navigate('/movies', { replace: true });
           }
@@ -76,7 +76,7 @@ function App() {
       });
   }
 
-  // получаю и устанавливаю данные пользователя, когда проходит логие
+  // получаю и устанавливаю данные пользователя, когда проходит логин
   useEffect(() => {
     if (loggedIn) {
       mainApi
