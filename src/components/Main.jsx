@@ -11,7 +11,7 @@ import Footer from './Footer';
 function Main() {
   return (
     <>
-      <NavTab />
+      {/* <NavTab /> */}
       <main className='main main_mediaScreen'>
         <Promo />
         <AboutProject />

@@ -1,6 +1,6 @@
 // база
 import { React, useState, useEffect } from 'react';
-import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ProtectedRoute from './ProtectedRoute';
 import * as mainApi from '../utils/MainApi';
@@ -13,6 +13,9 @@ import Main from './Main';
 import Movies from './Movies';
 import NotFoundPage from './NotFoundPage';
 import SavedMovies from './SavedMovies';
+import Header from './Header';
+import Navigation from './Navigation';
+import NavTab from './NavTab';
 
 function App() {
 
@@ -98,17 +101,11 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser || ''}>
       <div className='app'>
+        {loggedIn ?
+          <Navigation /> :
+          <NavTab />
+        }
         <Routes>
-          <Route
-            path="/"
-            element={
-              loggedIn ? (
-                <Navigate to='/sign-up' replace />
-              ) : (
-                <Navigate to='/movies' replace />
-              )
-            }
-          />
           <Route
             path='/sign-in'
             element={
