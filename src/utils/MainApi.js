@@ -1,4 +1,9 @@
-export const BASE_URL = 'https://api.wofamovies.nomoredomains.work';
+import {
+  BASE_URL,
+  SIGNUP,
+  SIGIN,
+  USERS_ME,
+} from './constants';
 
 // проверка ответа с сервера
 function checkAnswerFromServer(res) {
@@ -11,7 +16,7 @@ function checkAnswerFromServer(res) {
 
 // регистрация
 export const register = (name, email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${BASE_URL}${SIGNUP}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -26,7 +31,7 @@ export const register = (name, email, password) => {
 
 // логин
 export const login = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${BASE_URL}${SIGIN}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -41,7 +46,7 @@ export const login = (email, password) => {
 
 // проверка токена
 export const checkToken = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${BASE_URL}${USERS_ME}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -57,7 +62,7 @@ export const checkToken = (token) => {
 // получаю информацию о пользователе
 export const getCurrentUser = () => {
   const token = localStorage.getItem('token');
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${BASE_URL}${USERS_ME}`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
