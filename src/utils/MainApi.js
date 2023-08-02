@@ -3,7 +3,7 @@ import {
   SIGNUP,
   SIGIN,
   USERS_ME,
-} from './constants';
+} from './constants/constants';
 
 // проверка ответа с сервера
 function checkAnswerFromServer(res) {
