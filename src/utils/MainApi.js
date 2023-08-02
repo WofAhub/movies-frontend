@@ -7,62 +7,54 @@ import {
 import checkAnswerFromServer from './function/function';
 
 // регистрация
-export const register = (name, email, password) => {
-  return fetch(`${BASE_URL}${SIGNUP}`, {
+export const register = async (name, email, password) => {
+  const res = await fetch(`${BASE_URL}${SIGNUP}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ name, email, password })
-  })
-    .then((res) => {
-      return checkAnswerFromServer(res)
-    })
+  });
+  return checkAnswerFromServer(res);
 }
 
 // логин
-export const login = (email, password) => {
-  return fetch(`${BASE_URL}${SIGIN}`, {
+export const login = async (email, password) => {
+  const res = await fetch(`${BASE_URL}${SIGIN}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ email, password })
-  })
-    .then((res) => {
-      return checkAnswerFromServer(res)
-    })
+  });
+  return checkAnswerFromServer(res);
 };
 
 // проверка токена
-export const checkToken = (token) => {
-  return fetch(`${BASE_URL}${USERS_ME}`, {
+export const checkToken = async (token) => {
+  const res = await fetch(`${BASE_URL}${USERS_ME}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-  })
-    .then((res) => {
-      return checkAnswerFromServer(res)
-    })
+  });
+  return checkAnswerFromServer(res);
 };
 
 // получаю информацию о пользователе
-export const getCurrentUser = () => {
+export const getCurrentUser = async () => {
   const token = localStorage.getItem('token');
-  return fetch(`${BASE_URL}${USERS_ME}`, {
+  const res = await fetch(`${BASE_URL}${USERS_ME}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-  })
-    .then((res) => {
-      return checkAnswerFromServer(res)
-    })
+  });
+  return checkAnswerFromServer(res);
 };
