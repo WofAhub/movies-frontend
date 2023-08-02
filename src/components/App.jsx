@@ -91,7 +91,7 @@ function App() {
   }
 
   // получаю и устанавливаю данные пользователя, когда проходит логие
-  React.useEffect(() => {
+  useEffect(() => {
     if (loggedIn) {
       mainApi
         .getCurrentUser()
