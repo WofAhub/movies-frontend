@@ -169,6 +169,7 @@
 @import url(./blocks/preloader/__objects/_figure1/preloader__objects_figure1.css);
 @import url(./blocks/preloader/__objects/_figure2/preloader__objects_figure2.css);
 @import url(./blocks/preloader/__objects/_figure3/preloader__objects_figure3.css);
+@import url(./blocks/preloader/_active/preloader_active.css);
 
 /* mediaScreen/header */
 @import url(./blocks/header/_mediaScreen/header_mediaScreen.css);

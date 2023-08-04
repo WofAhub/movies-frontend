@@ -15,11 +15,14 @@ import NotFoundPage from './NotFoundPage';
 import SavedMovies from './SavedMovies';
 import Navigation from './Navigation';
 import NavTab from './NavTab';
+import Preloader from './Preloader';
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [loading, setLoading] = useState(true);
+  // const [fault, setFault] = useState(false);
   const navigate = useNavigate();
 
   // проверка токена
@@ -36,9 +39,10 @@ function App() {
         })
         .catch((err) => {
           console.log(`Ошибка в checkToken, в App: ${err.status}`);
-        });
+        })
     }
   }
+
   useEffect(() => {
     checkToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,23 +50,30 @@ function App() {
 
   // регистрация
   function register({ name, email, password }) {
+    setLoading(true);
     mainApi
       .register(name, email, password)
       .then((res) => {
+        setLoading(false);
         console.log(res, 'Это res из register в App.jsx')
         navigate('/sign-in', { replace: true });
       })
       .catch((err) => {
         console.log(`Ошибка в регистрации, в App: ${err}`)
       })
+      .finally(() => {
+        setLoading(false);
+      })
   };
 
   // логин
   function login({ email, password }) {
+    setLoading(true);
     mainApi
       .login(email, password)
       .then((data) => {
         if (data.token) {
+          setLoading(false);
           console.log(data, "Это res из login в App.jsx")
           localStorage.setItem('token', data.token);
           setLoggedIn(true);
@@ -71,33 +82,46 @@ function App() {
       })
       .catch((err) => {
         console.log(`Ошибка в App, loginUser: ${err}`);
-      });
+      })
+      .finally(() => {
+        setLoading(false);
+      })
   }
 
   // получаю и устанавливаю данные пользователя, когда проходит логин
   useEffect(() => {
+    setLoading(true);
     if (loggedIn) {
       mainApi
         .getCurrentUser()
         .then((user) => {
+          setLoading(false);
           setCurrentUser(user);
         })
         .catch((err) => {
           console.log(`Ошибка: ${err.status}`);
-        });
+        })
+        .finally(() => {
+          setLoading(false);
+        })
     }
   }, [loggedIn]);
 
   // запрос обновления информации юзера
   function updateUserInfo(data) {
+    setLoading(true);
     mainApi
       .editUserInfo(data)
       .then((res) => {
+        setLoading(false);
         setCurrentUser(res);
       })
       .catch((err) => {
         console.log(`Ошибка в App, handleUpdateUser: ${err}`);
-      });
+      })
+      .finally(() => {
+        setLoading(false);
+      })
   }
 
   // логАут
@@ -173,6 +197,9 @@ function App() {
             }
           />
         </Routes>
+        <Preloader
+          loading={loading}
+        />
       </div >
     </CurrentUserContext.Provider >
   )

@@ -4,6 +4,8 @@
   justify-content: center;
   align-items: center;
 
+  visibility: hidden;
+
   background: rgba(250, 250, 250, 0.20);
   backdrop-filter: blur(5px);
 
