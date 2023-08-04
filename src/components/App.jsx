@@ -21,7 +21,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   // const [fault, setFault] = useState(false);
   const navigate = useNavigate();
 
@@ -90,8 +90,8 @@ function App() {
 
   // получаю и устанавливаю данные пользователя, когда проходит логин
   useEffect(() => {
-    setLoading(true);
     if (loggedIn) {
+      setLoading(true);
       mainApi
         .getCurrentUser()
         .then((user) => {

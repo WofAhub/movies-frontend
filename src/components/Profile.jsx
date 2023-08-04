@@ -31,7 +31,7 @@ function Profile({ logout, updateUserInfo }) {
 
   return (
     <section className='profile profile_mediaScreen'>
-      <h1 className='authAndRegister__heading'>{editMode ? 'Редактирование' : `Привет, ${name}`}</h1>
+      <h1 className='authAndRegister__heading authAndRegister__heading_profile'>{editMode ? 'Редактирование' : `Привет, ${name}`}</h1>
       <form onSubmit={handleSubmit} className='profile__grid'>
         <label htmlFor='profile_name' className={errors.name ? 'profile__paragraph profile__paragraph_nameLeft profile__paragraph_error' : 'profile__paragraph profile__paragraph_nameLeft'}>{errors.name ? errors.name : 'Имя'}</label>
         <input

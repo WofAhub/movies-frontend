@@ -8,6 +8,7 @@
 @import url(./blocks/authAndRegister/__box/authAndRegister__box.css);
 @import url(./blocks/authAndRegister/authAndRegister.css);
 @import url(./blocks/authAndRegister/__heading/authAndRegister__heading.css);
+@import url(./blocks/authAndRegister/__heading/_profile/authAndRegister__heading_profile.css);
 @import url(./blocks/authAndRegister/__top/authAndRegister__top.css);
 @import url(./blocks/authAndRegister/__form/authAndRegister__form.css);
 @import url(./blocks/authAndRegister/__input/authAndRegisterImputs__input.css);
