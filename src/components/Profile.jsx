@@ -41,8 +41,8 @@ function Profile({ logout, updateUserInfo }) {
           minLength='2'
           maxLength='40'
           className={editMode ? 'profile__paragraph profile__paragraph_nameRight profile__paragraph_active' : 'profile__paragraph profile__paragraph_nameRight'}
-          value={values.name || ''}
           placeholder={editMode ? 'Введите новое имя' : name}
+          value={values?.name || ''}
           onChange={handleChange}
           required
         />
@@ -53,8 +53,8 @@ function Profile({ logout, updateUserInfo }) {
           name='email'
           type='email'
           className={editMode ? 'profile__paragraph profile__paragraph_emailRight profile__paragraph_active' : 'profile__paragraph profile__paragraph_emailRight'}
-          value={values.email || ''}
           placeholder={editMode ? 'Введите новый email' : email}
+          value={values?.email || ''}
           onChange={handleChange}
           required
         />

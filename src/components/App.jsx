@@ -16,13 +16,19 @@ import SavedMovies from './SavedMovies';
 import Navigation from './Navigation';
 import NavTab from './NavTab';
 import Preloader from './Preloader';
+import { ERROR_MESSAGES } from '../utils/constants/constants';
+
+// ошибки
+import { DUBLICATE_ERROR } from '../errors/DublicateError';
+import { UNAUTHORIZED_ERROR } from '../errors/UnauthorizedError';
+import { UNHANDLE_ERROR } from '../errors/UnhandleError';
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  // const [fault, setFault] = useState(false);
   const navigate = useNavigate();
 
   // проверка токена
@@ -55,10 +61,21 @@ function App() {
       .register(name, email, password)
       .then((res) => {
         setLoading(false);
+        setErrorMessage('');
         console.log(res, 'Это res из register в App.jsx')
         navigate('/sign-in', { replace: true });
       })
       .catch((err) => {
+        let errorMessage;
+        if (DUBLICATE_ERROR) {
+          errorMessage = ERROR_MESSAGES.EMAIL_IS_EXISTS_ALREADY;
+        } else if (UNHANDLE_ERROR) {
+          errorMessage = ERROR_MESSAGES.ERROR_SERVER;
+        } else {
+          errorMessage = ERROR_MESSAGES.ERROR_SIGNUP;
+        }
+        setLoading(false);
+        setErrorMessage(errorMessage);
         console.log(`Ошибка в регистрации, в App: ${err}`)
       })
       .finally(() => {
@@ -81,6 +98,16 @@ function App() {
         }
       })
       .catch((err) => {
+        let errorMessage;
+        if (UNAUTHORIZED_ERROR) {
+          errorMessage = ERROR_MESSAGES.WRONG_EMAIL_OR_PASSWORD;
+        } else if (UNHANDLE_ERROR) {
+          errorMessage = ERROR_MESSAGES.ERROR_SERVER;
+        } else {
+          errorMessage = ERROR_MESSAGES.ERROR_SIGNIN;
+        }
+        setLoading(false);
+        setErrorMessage(errorMessage);
         console.log(`Ошибка в App, loginUser: ${err}`);
       })
       .finally(() => {
@@ -124,7 +151,15 @@ function App() {
       })
   }
 
-  // логАут
+  // убираю сообщения об ошибках в логине и регистре, 
+  //когда было соверешно перемещение по страницам
+  useEffect(() => {
+    if (currentUser) {
+      setErrorMessage('');
+    }
+  }, [currentUser, navigate]);
+
+  // выход из аккаунта
   function logOut() {
     localStorage.removeItem('token');
     setLoggedIn(false);
@@ -144,6 +179,7 @@ function App() {
             element={
               <Login
                 onLogin={login}
+                errorMessage={errorMessage}
               />
             }
           />
@@ -152,6 +188,7 @@ function App() {
             element={
               <Register
                 onRegister={register}
+                errorMessage={errorMessage}
               />
             }
           />

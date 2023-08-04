@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AuthAndRegister from './AuthAndRegister';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 
-function Register({ onRegister }) {
+function Register({ onRegister, errorMessage }) {
 
   const { values, handleChange, errors, isValid } = useFormAndValidation({
     email: '',
@@ -23,6 +23,7 @@ function Register({ onRegister }) {
       authAndRegisterHeading={'Добро пожаловать'}
       onSubmit={handleSubmit}
       isValid={isValid}
+      errorMessage={errorMessage}
       authAndRegisterImputs={
         <>
           <fieldset className='authAndRegisterImputs__fieldset'>
@@ -37,7 +38,7 @@ function Register({ onRegister }) {
               maxLength='40'
               className={errors.name ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
               placeholder='Ваше имя'
-              value={values.name}
+              value={values?.name || ''}
               onChange={handleChange}
               required
             />
@@ -53,7 +54,7 @@ function Register({ onRegister }) {
               type='email'
               className={errors.email ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
               placeholder='Ваш e-mail'
-              value={values.email}
+              value={values?.email || ''}
               onChange={handleChange}
               required
             />
@@ -69,7 +70,7 @@ function Register({ onRegister }) {
               type='password'
               className={errors.password ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
               placeholder='Придумайте надёжный пароль'
-              value={values.password}
+              value={values?.password || ''}
               onChange={handleChange}
               required
             />

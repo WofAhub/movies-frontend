@@ -16,6 +16,8 @@
 @import url(./blocks/authAndRegister/__label/authAndRegisterImputs__label.css);
 @import url(./blocks/authAndRegister/__submit-btn/authAndRegister__submit-btn.css);
 @import url(./blocks/authAndRegister/__fieldset/authAndRegisterImputs__fieldset);
+@import url(./blocks/authAndRegister/__span/authAndRegister__span.css);
+@import url(./blocks/authAndRegister/__box-error/authAndRegister__box-error.css);
 
 /* alreadyRegistered */
 @import url(./blocks/registerOrLogin/registerOrLogin.css);

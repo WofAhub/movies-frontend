@@ -1,0 +1,15 @@
+.authAndRegister__span {
+  display: block;
+  color: #ee3465;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+
+  position: absolute;
+  top: 45%;
+  left: 0;
+}

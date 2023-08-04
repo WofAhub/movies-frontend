@@ -8,6 +8,7 @@ function AuthAndRegister({
   registerOrLogin,
   onSubmit,
   isValid,
+  errorMessage,
 }) {
   return (
     <section className='authAndRegister'>
@@ -18,7 +19,10 @@ function AuthAndRegister({
         </div>
         <form className='authAndRegister__form' onSubmit={onSubmit}>
           {authAndRegisterImputs}
-          <button type='submit' className={isValid ? 'authAndRegister__submit-btn button_authAndReg' : 'authAndRegister__submit-btn button_authAndReg button_authAndReg_error'}>{authAndRegisterBtnSubmit}</button>
+          <div className='authAndRegister__box-error'>
+            <span className='authAndRegister__span'>{errorMessage}</span>
+            <button type='submit' className={isValid ? 'authAndRegister__submit-btn button_authAndReg' : 'authAndRegister__submit-btn button_authAndReg button_authAndReg_error'}>{authAndRegisterBtnSubmit}</button>
+          </div>
         </form>
         {registerOrLogin}
       </div>

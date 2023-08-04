@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AuthAndRegister from './AuthAndRegister';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 
-function Login({ onLogin }) {
+function Login({ onLogin, errorMessage }) {
 
   const { values, handleChange, errors, isValid } = useFormAndValidation({
     email: '',
@@ -22,6 +22,7 @@ function Login({ onLogin }) {
       authAndRegisterHeading={'Рады видеть'}
       onSubmit={handleSubmit}
       isValid={isValid}
+      errorMessage={errorMessage}
       authAndRegisterImputs={
         <>
           <fieldset className='authAndRegisterImputs__fieldset'>
@@ -34,7 +35,7 @@ function Login({ onLogin }) {
               type='email'
               className={errors.email ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
               placeholder='Ваш e-mail'
-              value={values.email}
+              value={values?.email || ''}
               onChange={handleChange}
               required
             />
@@ -49,7 +50,7 @@ function Login({ onLogin }) {
               name='password'
               type='password'
               className={errors.password ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
-              value={values.password}
+              value={values?.password || ''}
               onChange={handleChange}
               placeholder='Пароль'
               required
