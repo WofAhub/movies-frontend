@@ -76,6 +76,9 @@
 @import url(./blocks/profile/__line/profile__line.css);
 @import url(./blocks/profile/__buttons/profile__buttons.css);
 @import url(./blocks/profile/__button/profile__button.css);
+@import url(./blocks/profile/__paragraph/_active/profile__paragraph_active.css);
+@import url(./blocks/profile/__buttons/_editMode/profile__buttons_editMode.css);
+@import url(./blocks/profile/__button/_disable/profile__button_disable.css);
 
 /* aboutProject */
 @import url(./blocks/aboutProject/aboutProject.css);

@@ -7,54 +7,82 @@ import {
 import checkAnswerFromServer from './function/function';
 
 // регистрация
-export const register = async (name, email, password) => {
-  const res = await fetch(`${BASE_URL}${SIGNUP}`, {
+export const register = (name, email, password) => {
+  return fetch(`${BASE_URL}${SIGNUP}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ name, email, password })
-  });
-  return checkAnswerFromServer(res);
+  })
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
 }
 
 // логин
-export const login = async (email, password) => {
-  const res = await fetch(`${BASE_URL}${SIGIN}`, {
+export const login = (email, password) => {
+  return fetch(`${BASE_URL}${SIGIN}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ email, password })
-  });
-  return checkAnswerFromServer(res);
+  })
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
 };
 
 // проверка токена
-export const checkToken = async (token) => {
-  const res = await fetch(`${BASE_URL}${USERS_ME}`, {
+export const checkToken = (token) => {
+  return fetch(`${BASE_URL}${USERS_ME}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-  });
-  return checkAnswerFromServer(res);
+  })
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
 };
 
 // получаю информацию о пользователе
-export const getCurrentUser = async () => {
+export const getCurrentUser = () => {
   const token = localStorage.getItem('token');
-  const res = await fetch(`${BASE_URL}${USERS_ME}`, {
+  return fetch(`${BASE_URL}${USERS_ME}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-  });
-  return checkAnswerFromServer(res);
+  })
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
 };
+
+// редактирование информации о пользователе через попап Профиля
+export const editUserInfo = (data) => {
+  const token = localStorage.getItem('token');
+  return fetch(`${BASE_URL}${USERS_ME}`, {
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email
+    })
+  })
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
+}

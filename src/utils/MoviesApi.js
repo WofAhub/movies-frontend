@@ -1,8 +1,10 @@
-import { MOVIES_URL } from "./constants.js";
+import { MOVIES_URL } from './constants/constants';
 import checkAnswerFromServer from './function/function.js';
 
 // получить фильмы
-export async function getMovies() {
-  const res = await fetch(MOVIES_URL);
-  return checkAnswerFromServer(res);
+export function getMovies() {
+  return fetch(`${MOVIES_URL}`)
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
 }

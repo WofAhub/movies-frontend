@@ -1,0 +1,5 @@
+.profile__button_disable {
+  cursor: default;
+  pointer-events: none;
+  opacity: 20%;
+}

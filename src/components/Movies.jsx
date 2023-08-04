@@ -1,4 +1,4 @@
-import React from 'react';
+import { React } from 'react';
 
 import SearchForm from './SearchForm';
 import MoviesCardList from './MoviesCardList';

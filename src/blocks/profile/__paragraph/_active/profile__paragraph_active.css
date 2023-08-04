@@ -1,0 +1,8 @@
+.profile__paragraph_active {
+  pointer-events: visible;
+  outline: transparent;
+}
+
+.profile__paragraph_active::placeholder {
+  color: #A0A0A0;
+}

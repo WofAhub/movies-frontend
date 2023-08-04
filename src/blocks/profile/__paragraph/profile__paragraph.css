@@ -3,9 +3,21 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  pointer-events: none;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  background-color: transparent;
+  border: none;
 
   margin: 0;
   padding: 0;
+}
+
+.profile__paragraph::placeholder {
+  color: black;
 }
 
 .profile__paragraph_nameLeft {
@@ -24,4 +36,8 @@
 .profile__paragraph_emailRight {
   grid-area: emailRight;
   text-align: right;
+}
+
+.profile__paragraph_error {
+  color: #EE3465;
 }

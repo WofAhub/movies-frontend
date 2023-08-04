@@ -29,7 +29,7 @@ function App() {
       mainApi
         .checkToken(token)
         .then((res) => {
-          if (res.data) {
+          if (res) {
             setLoggedIn(true);
             navigate('/movies', { replace: true });
           }
@@ -74,13 +74,6 @@ function App() {
       });
   }
 
-  // логАут
-  function logOut() {
-    localStorage.removeItem('token');
-    setLoggedIn(false);
-    navigate('/sign-in', { replace: true });
-  }
-
   // получаю и устанавливаю данные пользователя, когда проходит логин
   useEffect(() => {
     if (loggedIn) {
@@ -94,6 +87,25 @@ function App() {
         });
     }
   }, [loggedIn]);
+
+  // запрос обновления информации юзера
+  function updateUserInfo(data) {
+    mainApi
+      .editUserInfo(data)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        console.log(`Ошибка в App, handleUpdateUser: ${err}`);
+      });
+  }
+
+  // логАут
+  function logOut() {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    navigate('/sign-in', { replace: true });
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser || ''}>
@@ -148,6 +160,7 @@ function App() {
             element={
               <ProtectedRoute
                 element={Profile}
+                updateUserInfo={updateUserInfo}
                 loggedIn={loggedIn}
                 logout={logOut}
               />
