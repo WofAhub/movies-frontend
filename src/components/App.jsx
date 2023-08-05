@@ -171,7 +171,13 @@ function App() {
       <div className='app'>
         {loggedIn ?
           <Navigation /> :
-          <NavTab />
+          window.location.pathname === '/sign-up' ?
+          null :
+          window.location.pathname === '/sign-in' ?
+          null :
+          window.location.pathname !== '/sign-in' ?
+          <NavTab /> :
+          null
         }
         <Routes>
           <Route
