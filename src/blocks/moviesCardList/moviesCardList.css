@@ -1,6 +1,8 @@
 .moviesCardList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(364px, 1fr));
+
+  list-style: none;
   
   column-gap: 24px;
   row-gap: 30px;

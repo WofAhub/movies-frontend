@@ -30,6 +30,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [moviesList, setMoviesList] = useState([]);
+  const [visibleMovies, setVisibleMovies] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -183,6 +184,10 @@ function App() {
     getMovies();
   }, [])
 
+  function showMoreMovies() {
+    setVisibleMovies(prevValue => prevValue + 4)
+  }
+
   // выход из аккаунта
   function logOut() {
     localStorage.removeItem('token');
@@ -235,6 +240,8 @@ function App() {
                 loggedIn={loggedIn}
                 element={Movies}
                 moviesList={moviesList}
+                visibleMovies={visibleMovies}
+                showMoreMovies={showMoreMovies}
               />
             }
           />
