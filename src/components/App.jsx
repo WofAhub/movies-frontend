@@ -4,6 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ProtectedRoute from './ProtectedRoute';
 import * as mainApi from '../utils/MainApi';
+import * as moviesApi from '../utils/MoviesApi';
 
 // модули
 import Register from './Register';
@@ -27,6 +28,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [moviesList, setMoviesList] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -159,6 +161,27 @@ function App() {
     }
   }, [currentUser, navigate]);
 
+  //получаю фильмы
+  function getMovies() {
+    setLoading(true);
+    moviesApi
+      .getMovies()
+      .then((res) => {
+        setLoading(false);
+        setMoviesList(res)
+      })
+      .catch((err) => {
+        console.log(`Ошибка в Movies, getMovies: ${err}`)
+      })
+      .finally(() => {
+        setLoading(false);
+      })
+  }
+
+  useEffect(() => {
+    getMovies();
+  }, [])
+
   // выход из аккаунта
   function logOut() {
     localStorage.removeItem('token');
@@ -172,12 +195,12 @@ function App() {
         {loggedIn ?
           <Navigation /> :
           window.location.pathname === '/sign-up' ?
-          null :
-          window.location.pathname === '/sign-in' ?
-          null :
-          window.location.pathname !== '/sign-in' ?
-          <NavTab /> :
-          null
+            null :
+            window.location.pathname === '/sign-in' ?
+              null :
+              window.location.pathname !== '/sign-in' ?
+                <NavTab /> :
+                null
         }
         <Routes>
           <Route
@@ -210,6 +233,7 @@ function App() {
               <ProtectedRoute
                 loggedIn={loggedIn}
                 element={Movies}
+                moviesList={moviesList}
               />
             }
           />
