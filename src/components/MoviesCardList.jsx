@@ -1,15 +1,15 @@
 // база
 import { React } from 'react';
-// import * as moviesApi from '../utils/MoviesApi';
 import MoviesCard from './MoviesCard';
+// import useFormAndValidation from '../hooks/useFormAndValidation';
 
-function MoviesCardList({ moviesList }) {
+function MoviesCardList({ searchMovies }) {
 
   return (
     <>
       <section className='moviesCardList moviesCardList_mediaScreen'>
         {
-          moviesList.map((movies, movie) => {
+          searchMovies.map((movies, movie) => {
             return (
               <MoviesCard movies={movies} key={movie} />
             )

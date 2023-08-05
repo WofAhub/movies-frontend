@@ -1,6 +1,10 @@
+//размер экрана
 export const LAPTOP_SCREEN_WIDTH = 1024;
 export const TABLET_SCREEN_WIDTH = 768;
 export const MOBILE_SCREEN_WIDTH = 480;
+
+//роут
+export const PATH_404 = '/*'
 
 // ссылка на бэк
 export const BASE_URL = 'https://api.wofamovies.nomoredomains.work';

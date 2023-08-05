@@ -18,6 +18,7 @@ import Navigation from './Navigation';
 import NavTab from './NavTab';
 import Preloader from './Preloader';
 import { ERROR_MESSAGES } from '../utils/constants/constants';
+import { PATH_404 } from '../utils/constants/constants';
 
 // ошибки
 import { DUBLICATE_ERROR } from '../errors/DublicateError';
@@ -258,7 +259,7 @@ function App() {
             }
           />
           <Route
-            path='*'
+            path={PATH_404}
             element={
               <NotFoundPage />
             }
