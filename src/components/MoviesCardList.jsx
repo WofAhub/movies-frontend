@@ -1,8 +1,11 @@
 // база
 import { React } from 'react';
+import { useLocation } from 'react-router-dom';
 import MoviesCard from './MoviesCard';
 
 function MoviesCardList({ searchMovies, showMoreMovies, visibleMovies }) {
+  const location = useLocation();
+  const pathMovies = location.pathname === '/movies';
 
   return (
     <>
@@ -17,7 +20,10 @@ function MoviesCardList({ searchMovies, showMoreMovies, visibleMovies }) {
           }
         </ul>
       </section>
-      <button onClick={showMoreMovies} type='button' className='movies__button button'>Ещё</button>
+      {visibleMovies < searchMovies?.length && pathMovies ?
+        <button onClick={showMoreMovies} type='button' className='movies__button button'>Ещё</button>
+        : null
+      }
     </>
   )
 }

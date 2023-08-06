@@ -19,6 +19,7 @@ import NavTab from './NavTab';
 import Preloader from './Preloader';
 import { ERROR_MESSAGES } from '../utils/constants/constants';
 import { PATH_404 } from '../utils/constants/constants';
+import useWindowDimensions from '../hooks/useWindowDemension';
 
 // ошибки
 import { DUBLICATE_ERROR } from '../errors/DublicateError';
@@ -29,11 +30,14 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+
   const [moviesList, setMoviesList] = useState([]);
-  const [visibleMovies, setVisibleMovies] = useState(0);
+  const [visibleMovies, setVisibleMovies] = useState(12);
+
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const windowWidth = useWindowDimensions();
 
   // проверка токена
   function checkToken() {
@@ -184,8 +188,19 @@ function App() {
     getMovies();
   }, [])
 
+  // кнопка "еще"
   function showMoreMovies() {
+    if(windowWidth >= 1280) {
     setVisibleMovies(prevValue => prevValue + 4)
+    } else if (windowWidth >= 768){
+      setVisibleMovies(prevValue => prevValue + 4)
+    } else if (windowWidth >= 480 ) {
+      setVisibleMovies(prevValue => prevValue + 5)
+    } else if (windowWidth >= 320 ) {
+      setVisibleMovies(prevValue => prevValue + 5)
+    } else {
+      setVisibleMovies(prevValue => prevValue + 4)
+    }
   }
 
   // выход из аккаунта

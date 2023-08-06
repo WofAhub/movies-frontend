@@ -21,8 +21,8 @@ function Movies({ moviesList, showMoreMovies, visibleMovies }) {
       <section className='movies movies_mediaScreen'>
         <div className='movies__box'>
           <SearchForm moviesList={moviesList} setValues={setValues} values={values} />
-          <MoviesCardList 
-            searchMovies={searchMovies} 
+          <MoviesCardList
+            searchMovies={searchMovies}
             visibleMovies={visibleMovies}
             showMoreMovies={showMoreMovies}
           />

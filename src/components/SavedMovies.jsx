@@ -12,7 +12,6 @@ function SavedMovies() {
           <SearchForm />
           <MoviesCardList />
         </div>
-        <button type='button' className='movies__button button'>Ещё</button>
       </section>
       <Footer />
     </>
