@@ -1,10 +1,45 @@
+// база
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+import * as mainApi from '../utils/MainApi';
 
+// модули
 import AuthAndRegister from './AuthAndRegister';
 import useFormAndValidation from '../hooks/useFormAndValidation';
+import { MOVIES } from '../utils/constants/constants';
 
-function Login({ onLogin, errorMessage }) {
+// ошибки
+import { UNAUTHORIZED_ERROR } from '../errors/UnauthorizedError';
+import { UNHANDLE_ERROR } from '../errors/UnhandleError';
+import { ERROR_MESSAGES } from '../utils/constants/constants';
+
+function Login({ setErrorMessage, setLoggedIn, setLoading, errorMessage }) {
+
+  const navigate = useNavigate();
+
+  async function login({ email, password }) {
+    setLoading(true);
+    try {
+      const res = await mainApi.login(email, password)
+      setLoading(false);
+      console.log(res, "Это res из login в App.jsx")
+      localStorage.setItem('token', res.token);
+      setLoggedIn(true);
+      navigate(MOVIES, { replace: true });
+    } catch (err) {
+      let errorMessage;
+      if (UNAUTHORIZED_ERROR) {
+        errorMessage = ERROR_MESSAGES.WRONG_EMAIL_OR_PASSWORD;
+      } else if (UNHANDLE_ERROR) {
+        errorMessage = ERROR_MESSAGES.ERROR_SERVER;
+      } else {
+        errorMessage = ERROR_MESSAGES.ERROR_SIGNIN;
+      }
+      setLoading(false);
+      setErrorMessage(errorMessage);
+      console.log(`Ошибка в App, loginUser: ${err}`);
+    }
+  }
 
   const { values, handleChange, errors, isValid } = useFormAndValidation({
     email: '',
@@ -14,7 +49,7 @@ function Login({ onLogin, errorMessage }) {
   // подтверждение
   function handleSubmit(evt) {
     evt.preventDefault();
-    onLogin(values);
+    login(values);
   }
 
   return (

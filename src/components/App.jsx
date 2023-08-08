@@ -4,7 +4,6 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ProtectedRoute from './ProtectedRoute';
 import * as mainApi from '../utils/MainApi';
-import * as moviesApi from '../utils/MoviesApi';
 
 // модули
 import Register from './Register';
@@ -17,27 +16,16 @@ import SavedMovies from './SavedMovies';
 import Navigation from './Navigation';
 import NavTab from './NavTab';
 import Preloader from './Preloader';
-import { ERROR_MESSAGES } from '../utils/constants/constants';
-import { PATH_404 } from '../utils/constants/constants';
-import useWindowDimensions from '../hooks/useWindowDemension';
-
-// ошибки
-import { DUBLICATE_ERROR } from '../errors/DublicateError';
-import { UNAUTHORIZED_ERROR } from '../errors/UnauthorizedError';
-import { UNHANDLE_ERROR } from '../errors/UnhandleError';
+import { PATH_404, PROFILE, SAVED_MOVIES, MOVIES, SIGN_IN, SIGN_UP, BASE_ROUTE } from '../utils/constants/constants';
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
-  const [moviesList, setMoviesList] = useState([]);
-  const [visibleMovies, setVisibleMovies] = useState(12);
-
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const windowWidth = useWindowDimensions();
 
   // проверка токена
   function checkToken() {
@@ -48,7 +36,7 @@ function App() {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            navigate('/movies', { replace: true });
+            navigate(MOVIES, { replace: true });
           }
         })
         .catch((err) => {
@@ -61,67 +49,6 @@ function App() {
     checkToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // регистрация
-  function register({ name, email, password }) {
-    setLoading(true);
-    mainApi
-      .register(name, email, password)
-      .then((res) => {
-        setLoading(false);
-        setErrorMessage('');
-        console.log(res, 'Это res из register в App.jsx')
-        navigate('/sign-in', { replace: true });
-      })
-      .catch((err) => {
-        let errorMessage;
-        if (DUBLICATE_ERROR) {
-          errorMessage = ERROR_MESSAGES.EMAIL_IS_EXISTS_ALREADY;
-        } else if (UNHANDLE_ERROR) {
-          errorMessage = ERROR_MESSAGES.ERROR_SERVER;
-        } else {
-          errorMessage = ERROR_MESSAGES.ERROR_SIGNUP;
-        }
-        setLoading(false);
-        setErrorMessage(errorMessage);
-        console.log(`Ошибка в регистрации, в App: ${err}`)
-      })
-      .finally(() => {
-        setLoading(false);
-      })
-  };
-
-  // логин
-  function login({ email, password }) {
-    setLoading(true);
-    mainApi
-      .login(email, password)
-      .then((data) => {
-        if (data.token) {
-          setLoading(false);
-          console.log(data, "Это res из login в App.jsx")
-          localStorage.setItem('token', data.token);
-          setLoggedIn(true);
-          navigate('/movies', { replace: true });
-        }
-      })
-      .catch((err) => {
-        let errorMessage;
-        if (UNAUTHORIZED_ERROR) {
-          errorMessage = ERROR_MESSAGES.WRONG_EMAIL_OR_PASSWORD;
-        } else if (UNHANDLE_ERROR) {
-          errorMessage = ERROR_MESSAGES.ERROR_SERVER;
-        } else {
-          errorMessage = ERROR_MESSAGES.ERROR_SIGNIN;
-        }
-        setLoading(false);
-        setErrorMessage(errorMessage);
-        console.log(`Ошибка в App, loginUser: ${err}`);
-      })
-      .finally(() => {
-        setLoading(false);
-      })
-  }
 
   // получаю и устанавливаю данные пользователя, когда проходит логин
   useEffect(() => {
@@ -167,47 +94,11 @@ function App() {
     }
   }, [currentUser, navigate]);
 
-  //получаю фильмы
-  function getMovies() {
-    setLoading(true);
-    moviesApi
-      .getMovies()
-      .then((res) => {
-        setLoading(false);
-        setMoviesList(res)
-      })
-      .catch((err) => {
-        console.log(`Ошибка в Movies, getMovies: ${err}`)
-      })
-      .finally(() => {
-        setLoading(false);
-      })
-  }
-
-  useEffect(() => {
-    getMovies();
-  }, [])
-
-  // кнопка "еще"
-  function showMoreMovies() {
-    if(windowWidth >= 1280) {
-    setVisibleMovies(prevValue => prevValue + 4)
-    } else if (windowWidth >= 768){
-      setVisibleMovies(prevValue => prevValue + 4)
-    } else if (windowWidth >= 480 ) {
-      setVisibleMovies(prevValue => prevValue + 5)
-    } else if (windowWidth >= 320 ) {
-      setVisibleMovies(prevValue => prevValue + 5)
-    } else {
-      setVisibleMovies(prevValue => prevValue + 4)
-    }
-  }
-
   // выход из аккаунта
   function logOut() {
     localStorage.removeItem('token');
     setLoggedIn(false);
-    navigate('/sign-in', { replace: true });
+    navigate(SIGN_IN, { replace: true });
   }
 
   return (
@@ -215,53 +106,55 @@ function App() {
       <div className='app'>
         {loggedIn ?
           <Navigation /> :
-          window.location.pathname === '/sign-up' ?
+          window.location.pathname === SIGN_UP ?
             null :
-            window.location.pathname === '/sign-in' ?
+            window.location.pathname === SIGN_IN ?
               null :
-              window.location.pathname !== '/sign-in' ?
+              window.location.pathname !== SIGN_IN ?
                 <NavTab /> :
                 null
         }
         <Routes>
           <Route
-            path='/sign-in'
+            path={SIGN_IN}
             element={
               <Login
-                onLogin={login}
+                setErrorMessage={setErrorMessage}
+                setLoggedIn={setLoggedIn}
+                setLoading={setLoading}
                 errorMessage={errorMessage}
               />
             }
           />
           <Route
-            path='/sign-up'
+            path={SIGN_UP}
             element={
               <Register
-                onRegister={register}
+                setLoading={setLoading}
                 errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
               />
             }
           />
           <Route
-            path='/'
+            path={BASE_ROUTE}
             element={
               <Main />
             }
           />
           <Route
-            path='/movies'
+            path={MOVIES}
             element={
               <ProtectedRoute
                 loggedIn={loggedIn}
                 element={Movies}
-                moviesList={moviesList}
-                visibleMovies={visibleMovies}
-                showMoreMovies={showMoreMovies}
+
+                setLoading={setLoading}
               />
             }
           />
           <Route
-            path='/saved-movies'
+            path={SAVED_MOVIES}
             element={
               <ProtectedRoute
                 loggedIn={loggedIn}
@@ -270,7 +163,7 @@ function App() {
             }
           />
           <Route
-            path='/profile'
+            path={PROFILE}
             element={
               <ProtectedRoute
                 element={Profile}

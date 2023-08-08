@@ -1,10 +1,44 @@
+// база
 import { React } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+import * as mainApi from '../utils/MainApi';
 
+// модули
 import AuthAndRegister from './AuthAndRegister';
 import useFormAndValidation from '../hooks/useFormAndValidation';
+import { SIGN_IN } from '../utils/constants/constants';
 
-function Register({ onRegister, errorMessage }) {
+// ошибки
+import { DUBLICATE_ERROR } from '../errors/DublicateError';
+import { UNHANDLE_ERROR } from '../errors/UnhandleError';
+import { ERROR_MESSAGES } from '../utils/constants/constants';
+
+function Register({ setLoading, errorMessage, setErrorMessage }) {
+
+  const navigate = useNavigate();
+
+  async function register({ name, email, password }) {
+    setLoading(true);
+    try {
+      const res = await mainApi.register(name, email, password)
+      setLoading(false);
+      setErrorMessage('');
+      console.log(res, 'Это res из register в App.jsx')
+      navigate(SIGN_IN, { replace: true });
+    } catch (err) {
+      let errorMessage;
+      if (DUBLICATE_ERROR) {
+        errorMessage = ERROR_MESSAGES.EMAIL_IS_EXISTS_ALREADY;
+      } else if (UNHANDLE_ERROR) {
+        errorMessage = ERROR_MESSAGES.ERROR_SERVER;
+      } else {
+        errorMessage = ERROR_MESSAGES.ERROR_SIGNUP;
+      }
+      setLoading(false);
+      setErrorMessage(errorMessage);
+      console.log(`Ошибка в регистрации, в App: ${err}`)
+    }
+  }
 
   const { values, handleChange, errors, isValid } = useFormAndValidation({
     email: '',
@@ -15,7 +49,7 @@ function Register({ onRegister, errorMessage }) {
   // подтверждение
   function handleSubmit(evt) {
     evt.preventDefault();
-    onRegister(values);
+    register(values);
   }
 
   return (

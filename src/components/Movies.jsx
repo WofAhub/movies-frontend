@@ -1,14 +1,35 @@
 // база
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
+import * as moviesApi from '../utils/MoviesApi';
 
 // модули
 import SearchForm from './SearchForm';
 import MoviesCardList from './MoviesCardList';
 import Footer from './Footer';
 
-function Movies({ moviesList, showMoreMovies, visibleMovies }) {
+function Movies({ setLoading }) {
 
+  const [moviesList, setMoviesList] = useState([]);
   const [values, setValues] = useState('');
+
+  //получаю фильмы
+  async function getMovies() {
+    setLoading(true);
+    try {
+      let res = await moviesApi.getMovies()
+      setLoading(false);
+      setMoviesList(res);
+      console.log(console.log(res, "Это res из getMovies в Movies.jsx"))
+    } catch (err) {
+      console.log(`Ошибка в getMovies в Movies.jsx: ${err}`);
+    }
+  }
+
+  useEffect(() => {
+    getMovies()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
 
   const searchMovies = moviesList.filter(searchedMovie => {
     return (
@@ -23,8 +44,6 @@ function Movies({ moviesList, showMoreMovies, visibleMovies }) {
           <SearchForm moviesList={moviesList} setValues={setValues} values={values} />
           <MoviesCardList
             searchMovies={searchMovies}
-            visibleMovies={visibleMovies}
-            showMoreMovies={showMoreMovies}
           />
         </div>
       </section>

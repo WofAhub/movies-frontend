@@ -4,7 +4,7 @@ import {
   SIGIN,
   USERS_ME,
 } from './constants/constants';
-import checkAnswerFromServer from './function/function';
+import checkAnswerFromServer from './functions/function';
 
 // регистрация
 export const register = (name, email, password) => {

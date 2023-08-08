@@ -1,11 +1,31 @@
 // база
-import { React } from 'react';
+import { React, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from './MoviesCard';
+import useWindowDimensions from '../hooks/useWindowDemension';
 
-function MoviesCardList({ searchMovies, showMoreMovies, visibleMovies }) {
+function MoviesCardList({ searchMovies }) {
+
+  const [visibleMovies, setVisibleMovies] = useState(12);
+
   const location = useLocation();
   const pathMovies = location.pathname === '/movies';
+  const windowWidth = useWindowDimensions();
+
+  // кнопка "еще"
+  function showMoreMovies() {
+    if (windowWidth >= 1280) {
+      setVisibleMovies(prevValue => prevValue + 4)
+    } else if (windowWidth >= 768) {
+      setVisibleMovies(prevValue => prevValue + 4)
+    } else if (windowWidth >= 480) {
+      setVisibleMovies(prevValue => prevValue + 5)
+    } else if (windowWidth >= 320) {
+      setVisibleMovies(prevValue => prevValue + 5)
+    } else {
+      setVisibleMovies(prevValue => prevValue + 4)
+    }
+  }
 
   return (
     <>
