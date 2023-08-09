@@ -1,8 +1,10 @@
 // база
-import React from 'react';
+import { React, useState } from 'react';
 import FilterCheckbox from './FilterCheckbox';
 
-function SearchForm({ values, setValues }) {
+function SearchForm() {
+
+  const [seach, setSeach] = useState('');
 
   return (
     <section className='searchForm'>
@@ -12,12 +14,13 @@ function SearchForm({ values, setValues }) {
           type='search'
           className='searchForm__input'
           placeholder='Фильм'
-          value={values}
-          onChange={(evt) => setValues(evt.target.value)}
+          value={seach}
+          onChange={(e) => setSeach(e.target.value)}
         >
         </input>
       </form>
       <FilterCheckbox />
+      <span className='searchForm__span'></span>
     </section>
   );
 }

@@ -4,5 +4,17 @@
 
     margin: 0;
     padding: 0;
+
+    .movies__button {
+      width: 41.67%;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .movies_mediaScreen {
+    .movies__button {
+      width: 70%;
+    }
   }
 }

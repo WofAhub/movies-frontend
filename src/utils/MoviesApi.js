@@ -1,5 +1,5 @@
 import { MOVIES_URL } from './constants/constants';
-import checkAnswerFromServer from './functions/function.js';
+import checkAnswerFromServer from './functions/api.js';
 
 // получить фильмы
 export function getMovies() {

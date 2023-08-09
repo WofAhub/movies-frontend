@@ -20,11 +20,15 @@ import { PATH_404, PROFILE, SAVED_MOVIES, MOVIES, SIGN_IN, SIGN_UP, BASE_ROUTE }
 
 function App() {
 
+  // пользователь
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
+  // служебное
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // юзы
   const navigate = useNavigate();
 
   // проверка токена
@@ -109,10 +113,8 @@ function App() {
           window.location.pathname === SIGN_UP ?
             null :
             window.location.pathname === SIGN_IN ?
-              null :
-              window.location.pathname !== SIGN_IN ?
-                <NavTab /> :
-                null
+            null :
+            <NavTab />
         }
         <Routes>
           <Route
@@ -150,6 +152,7 @@ function App() {
                 element={Movies}
 
                 setLoading={setLoading}
+                loading={loading}
               />
             }
           />
@@ -173,12 +176,12 @@ function App() {
               />
             }
           />
-          <Route
-            path={PATH_404}
-            element={
-              <NotFoundPage />
-            }
-          />
+            <Route
+              path={PATH_404}
+              element={
+                <NotFoundPage />
+              }
+            />
         </Routes>
         <Preloader
           loading={loading}

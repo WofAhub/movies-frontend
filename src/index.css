@@ -146,6 +146,7 @@
 @import url(./blocks/searchForm/__submit-btn/searchForm__submit-btn.css);
 @import url(./blocks/searchForm/__form/searchForm__form.css);
 @import url(./blocks/searchForm/__input/searchForm__input.css);
+@import url(./blocks/searchForm/__span/searchForm__span.css);
 
 /* filterCheckbox */
 @import url(./blocks/filterCheckbox/filterCheckbox.css);

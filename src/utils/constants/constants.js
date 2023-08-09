@@ -3,7 +3,7 @@ export const BASE_URL = 'https://api.wofamovies.nomoredomains.work';
 export const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 //роуты фронт
-export const PATH_404 = '/*';
+export const PATH_404 = '*';
 export const PROFILE = '/profile';
 export const SAVED_MOVIES = '/saved-movies';
 export const MOVIES = '/movies';                  // + api
@@ -15,6 +15,8 @@ export const BASE_ROUTE = '/';
 export const SIGNUP = '/signup';
 export const SIGIN = '/signin';
 export const USERS_ME = '/users/me';
+
+export const DURATION_40 = 40;
 
 // валидация
 export const ERROR_MESSAGES = {

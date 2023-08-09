@@ -16,10 +16,10 @@ function Movies({ setLoading }) {
   async function getMovies() {
     setLoading(true);
     try {
-      let res = await moviesApi.getMovies()
+      const movies = await moviesApi.getMovies()
       setLoading(false);
-      setMoviesList(res);
-      console.log(console.log(res, "Это res из getMovies в Movies.jsx"))
+      setMoviesList(movies);
+      console.log(console.log(movies, "Это movies из getMovies в Movies.jsx"))
     } catch (err) {
       console.log(`Ошибка в getMovies в Movies.jsx: ${err}`);
     }
@@ -27,7 +27,7 @@ function Movies({ setLoading }) {
 
   useEffect(() => {
     getMovies()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 

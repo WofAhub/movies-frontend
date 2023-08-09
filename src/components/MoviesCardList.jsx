@@ -3,14 +3,15 @@ import { React, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from './MoviesCard';
 import useWindowDimensions from '../hooks/useWindowDemension';
+import { MOVIES } from '../utils/constants/constants';
 
 function MoviesCardList({ searchMovies }) {
 
-  const [visibleMovies, setVisibleMovies] = useState(12);
-
   const location = useLocation();
-  const pathMovies = location.pathname === '/movies';
+  const pathMovies = location.pathname === MOVIES;
   const windowWidth = useWindowDimensions();
+
+  const [visibleMovies, setVisibleMovies] = useState(1);
 
   // кнопка "еще"
   function showMoreMovies() {
@@ -29,17 +30,15 @@ function MoviesCardList({ searchMovies }) {
 
   return (
     <>
-      <section className='moviesCardList moviesCardList_mediaScreen'>
-        <ul className='moviesCardList moviesCardList_mediaScreen'>
+      <ul className='moviesCardList moviesCardList_mediaScreen'>
           {
             searchMovies.slice(0, visibleMovies).map((movies, movie) => {
               return (
-                <MoviesCard movies={movies} key={movie.movieID} />
+                <MoviesCard movies={movies} key={movie} />
               )
             })
           }
-        </ul>
-      </section>
+      </ul>
       {visibleMovies < searchMovies?.length && pathMovies ?
         <button onClick={showMoreMovies} type='button' className='movies__button button'>Ещё</button>
         : null
