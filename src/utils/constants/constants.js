@@ -16,6 +16,7 @@ export const SIGNUP = '/signup';
 export const SIGIN = '/signin';
 export const USERS_ME = '/users/me';
 
+// короткометражка
 export const DURATION_40 = 40;
 
 // валидация
@@ -27,3 +28,11 @@ export const ERROR_MESSAGES = {
     ERROR_SIGNUP: 'Во время регистрации произошла ошибка',
     ERROR_SIGNIN: 'Во время авторизации произошла ошибка',
 };
+
+// кол-во фильмов
+export const NUBER_OF_MOVIES_12 = 12;
+export const NUBER_OF_MOVIES_8 = 8;
+export const NUBER_OF_MOVIES_5 = 5;
+
+export const NUBER_OF_MOVIES_ADD_3 = 3;
+export const NUBER_OF_MOVIES_ADD_2 = 2;

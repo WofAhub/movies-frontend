@@ -1,6 +1,6 @@
 // база
 import { React, useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ProtectedRoute from './ProtectedRoute';
 import * as mainApi from '../utils/MainApi';
@@ -30,6 +30,7 @@ function App() {
 
   // юзы
   const navigate = useNavigate();
+  const location = useLocation();
 
   // проверка токена
   function checkToken() {
@@ -110,11 +111,11 @@ function App() {
       <div className='app'>
         {loggedIn ?
           <Navigation /> :
-          window.location.pathname === SIGN_UP ?
+          location.pathname === SIGN_UP ?
             null :
-            window.location.pathname === SIGN_IN ?
-            null :
-            <NavTab />
+            location.pathname === SIGN_IN ?
+              null :
+              <NavTab />
         }
         <Routes>
           <Route
@@ -176,12 +177,12 @@ function App() {
               />
             }
           />
-            <Route
-              path={PATH_404}
-              element={
-                <NotFoundPage />
-              }
-            />
+          <Route
+            path={PATH_404}
+            element={
+              <NotFoundPage />
+            }
+          />
         </Routes>
         <Preloader
           loading={loading}
