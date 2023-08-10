@@ -11,7 +11,7 @@ function Header({
   return (
     <header className='header header_burger header_mediaScreen'>
       <div className='header__box'>
-        <Link to='/' className='logo' />
+        <Link to='/' aria-label='Movies' className='logo' />
         {headerNavigation}
         {headerNavTab}
         {burgerButton}

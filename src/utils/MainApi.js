@@ -3,6 +3,7 @@ import {
   SIGNUP,
   SIGIN,
   USERS_ME,
+  MOVIES,
 } from './constants/constants';
 import checkAnswerFromServer from './functions/api';
 
@@ -86,3 +87,53 @@ export const editUserInfo = (data) => {
       return checkAnswerFromServer(res)
     })
 }
+
+// получение фильмов
+export const getMovies = (movies) => {
+  const token = localStorage.getItem('token');
+  return fetch(`${BASE_URL}${MOVIES}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  })
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
+}
+
+//удаляю фильмы из сохраненных
+export const deleteMovie = (id) => {
+  const token = localStorage.getItem('token');
+
+  return fetch(`${BASE_URL}${MOVIES}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  })
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
+};
+
+//сохраняю фильмы
+export const uploadMovie = (movie) => {
+  const token = localStorage.getItem('token');
+  return fetch(`${BASE_URL}${MOVIES}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(movie)
+      .then((res) => {
+        return checkAnswerFromServer(res)
+      })
+  })
+};

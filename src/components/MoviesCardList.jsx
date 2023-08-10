@@ -12,13 +12,25 @@ import {
   NUBER_OF_MOVIES_ADD_2,
 } from '../utils/constants/constants';
 
-function MoviesCardList({ searchMovies }) {
+function MoviesCardList({
+  isCurrentlySaved,
+  initialMovies,
+  getInitialMovies,
+  foundMovies,
+  isSaved,
+  onClick,
+  onDelete,
+  checkOnSaved,
+  savedMovies
+}) {
 
   const location = useLocation();
   const pathMovies = location.pathname === MOVIES;
   const windowWidth = useWindowDimensions();
 
   const [visibleMovies, setVisibleMovies] = useState(0);
+
+  const moviesToDisplay = !isSaved && foundMovies ? foundMovies.slice(0, visibleMovies) : foundMovies;
 
   const desktopSize = windowWidth > 1024;
   const tabletSize = windowWidth > 480 && windowWidth <= 768;
@@ -81,14 +93,24 @@ function MoviesCardList({ searchMovies }) {
     <>
       <ul className='moviesCardList moviesCardList_mediaScreen'>
         {
-          searchMovies.slice(0, visibleMovies).map((movies, movie) => {
+          moviesToDisplay.slice(0, visibleMovies).map((movies) => {
+            const key = movies.movieId
             return (
-              <MoviesCard movies={movies} key={movie} />
+              <MoviesCard 
+                movies={movies} 
+                key={key} 
+                isSaved={isSaved} 
+                savedMovies={savedMovies} 
+                foundMovies={foundMovies} 
+                onClick={onClick}
+                onDelBtn={onDelete}
+                checkOnSaved={checkOnSaved}
+              />
             )
           })
         }
       </ul>
-      {visibleMovies < searchMovies?.length && pathMovies ?
+      {visibleMovies < foundMovies?.length && pathMovies ?
         <button onClick={setMoreCards} type='button' className='movies__button button'>Ещё</button>
         : null
       }

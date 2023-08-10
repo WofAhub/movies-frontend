@@ -36,3 +36,23 @@ export const NUBER_OF_MOVIES_5 = 5;
 
 export const NUBER_OF_MOVIES_ADD_3 = 3;
 export const NUBER_OF_MOVIES_ADD_2 = 2;
+
+// устанавливаю данные по умолчанию, если данных нет в LS или они просто куда-то пропали
+export const dataMovies = (movies) => {
+    const newMovies = movies.map((movie) => {
+      return {
+        movieId: `${movie.id}`,
+        country: `${movie.country ? `${movie.country}` : `Страна неизвестна`}`,
+        director: `${movie.director ? `${movie.director}` : `Режисер неизвестен`}`,
+        duration: `${movie.duration ? `${movie.duration}` : `0`}`,
+        year: `${movie.year ? `${movie.year}` : `0`}`,
+        description: `${movie.description ? `${movie.description}` : `Описание отсутствует.`}`,
+        image: `${movie.image && movie.image.url ? `https://api.nomoreparties.co${movie.image.url}` : `https://sun9-21.userapi.com/impg/OBUbO8dqPtjzr0BXCnW4hDXaWrNzse_DduMJfA/7VsYiVFOOW8.jpg`}`,
+        trailer: `${movie.trailerLink ?  `${movie.trailerLink}` : `https://youtube.com`}`,
+        thumbnail: `${movie.image && movie.image.formats && movie.image.formats.thumbnail && movie.image.formats.thumbnail.url ? `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}` : `https://sun9-21.userapi.com/impg/OBUbO8dqPtjzr0BXCnW4hDXaWrNzse_DduMJfA/7VsYiVFOOW8.jpg`}`,
+        nameRU: `${movie.nameRU}` || `Без названия`,
+        nameEN: `${movie.nameEN}` || `Без названия`
+      }
+    });
+    localStorage.setItem('moviesCurrent', JSON.stringify(newMovies) );
+  }
