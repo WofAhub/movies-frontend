@@ -1,62 +1,66 @@
 // база
-import { React, useState, useRef, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import FilterCheckbox from './FilterCheckbox';
+import useForm from '../hooks/useForm';
 
-function SearchForm({ onSearch, onCheckbox, handleFilterState }) {
+function SearchForm({ onSubmit, toggleCheckbox, searchQuery, isShortSelected }) {
 
-  const [seachQuery, setSeachQuery] = useState('');
+  const valuesDefault = {
+    query: searchQuery,
+    shortMovies: isShortSelected,
+  }
+
+  const [values, isValid, handleChange] = useForm(
+    valuesDefault,
+    !!searchQuery,
+  );
+
   const [searchErrorMessage, setSearchErrorMessage] = useState('')
-  const [isValid, setIsValid] = useState(false);
-
-  const handleMovieSearch = (evt) => {
-    setSeachQuery(evt.target.value);
-    if (evt.target.value.length < 1) {
-      setIsValid(false);
-    } else {
-      setIsValid(true);
-    }
-  }
-
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    if (!isValid) {
-      setSearchErrorMessage('Нужно ввести ключевое слово');
-    }
-    else {
-      setSearchErrorMessage('');
-      onSearch(seachQuery);
-      localStorage.setItem('searchQuery', seachQuery)
-    }
-  }
-
-  const localStorageSearchQuery = localStorage.getItem('searchQuery') || ''
-  const inputRef = useRef(null);
 
   useEffect(() => {
-    inputRef.current.value = localStorageSearchQuery || '';
-  }, [localStorageSearchQuery]);
+    if (values.shortMovies !== isShortSelected) {
+      toggleCheckbox(values.shortMovies)
+    }
+  }, [values.shortMovies, toggleCheckbox, isShortSelected])
+
+  useEffect(() => {
+    if (isValid) {
+      setSearchErrorMessage('')
+    }
+  }, [isValid]);
+
+  function submit(evt) {
+    evt.preventDefault();
+    if (!isValid) {
+      setSearchErrorMessage('Необходимо ввести название фильма')
+      return;
+    }
+    onSubmit(values);
+    console.log('yes')
+  }
 
   return (
-    <section className='searchForm'>
-      <form id='search-form' onSubmit={handleSubmit} noValidate className='searchForm__form'>
+    <form onSubmit={submit} noValidate className='searchForm'>
+      <fieldset className='searchForm__form'>
         <button type='submit' className='searchForm__submit-btn'>Поиск</button>
         <input
-          id='search-input'
-          ref={inputRef}
-          type='search'
           className='searchForm__input'
+          name='query'
+          value={values.query}
+          type='search'
           placeholder='Фильм'
-          name="movie"
-          onChange={(evt) => handleMovieSearch(evt)}
+          onChange={handleChange}
+          required
         >
         </input>
-      </form>
-      <FilterCheckbox
-        onCheckbox={onCheckbox}
-        handleFilterState={handleFilterState}
-      />
+        <FilterCheckbox
+          name='checkboxFilter'
+          checked={values.shortMovies}
+          onChange={handleChange}
+        />
+      </fieldset>
       <span className='searchForm__span'>{searchErrorMessage}</span>
-    </section>
+    </form>
   );
 }
 

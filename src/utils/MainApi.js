@@ -89,7 +89,7 @@ export const editUserInfo = (data) => {
 }
 
 // получение фильмов
-export const getMovies = (movies) => {
+export const getMovies = () => {
   const token = localStorage.getItem('token');
   return fetch(`${BASE_URL}${MOVIES}`, {
     method: 'GET',
@@ -108,7 +108,7 @@ export const getMovies = (movies) => {
 export const deleteMovie = (id) => {
   const token = localStorage.getItem('token');
 
-  return fetch(`${BASE_URL}${MOVIES}/${id}`, {
+  return fetch(`${BASE_URL}/movies/${id}`, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
@@ -122,7 +122,7 @@ export const deleteMovie = (id) => {
 };
 
 //сохраняю фильмы
-export const uploadMovie = (movie) => {
+export const saveMovie = (movie) => {
   const token = localStorage.getItem('token');
   return fetch(`${BASE_URL}${MOVIES}`, {
     method: 'POST',
@@ -132,8 +132,8 @@ export const uploadMovie = (movie) => {
       'Authorization': `Bearer ${token}`
     },
     body: JSON.stringify(movie)
-      .then((res) => {
-        return checkAnswerFromServer(res)
-      })
   })
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
 };

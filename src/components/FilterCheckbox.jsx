@@ -1,10 +1,17 @@
 import React from "react";
 
-function FilterCheckbox({ onCheckbox, handleFilterState, handleFilterStateSavedMovies }) {
+function FilterCheckbox({ checked, onChange, name }) {
 
   return (
-    <label checked={handleFilterState || handleFilterStateSavedMovies} htmlFor='idCheckbox' className='filterCheckbox'>
-      <input onChange={() => onCheckbox()} id='idCheckbox' type='checkbox' className='filterCheckbox__input'></input>
+    <label htmlFor='checkbox' className='filterCheckbox'>
+      <input
+        name={name}
+        checked={checked}
+        id='checkbox'
+        type='checkbox'
+        className='filterCheckbox__input'
+        onChange={onChange}
+      />
       <span className='filterCheckbox__span'>Короткометражки</span>
     </label>
   );

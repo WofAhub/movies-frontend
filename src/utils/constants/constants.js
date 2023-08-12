@@ -21,13 +21,19 @@ export const DURATION_40 = 40;
 
 // валидация
 export const ERROR_MESSAGES = {
-    WRONG_EMAIL_OR_PASSWORD: 'Неправильный логин или пароль',
-    EMAIL_IS_EXISTS_ALREADY: 'Пользователь с таким email уже существует',
-    ERROR_SERVER: 'Ошибка на сервере',
-    UPDATE_ERROR: 'При обнолвении пользователя произошла ошибка',
-    ERROR_SIGNUP: 'Во время регистрации произошла ошибка',
-    ERROR_SIGNIN: 'Во время авторизации произошла ошибка',
+  WRONG_EMAIL_OR_PASSWORD: 'Неправильный логин или пароль',
+  EMAIL_IS_EXISTS_ALREADY: 'Пользователь с таким email уже существует',
+  ERROR_SERVER: 'Ошибка на сервере',
+  UPDATE_ERROR: 'При обнолвении пользователя произошла ошибка',
+  ERROR_SIGNUP: 'Во время регистрации произошла ошибка',
+  ERROR_SIGNIN: 'Во время авторизации произошла ошибка',
 };
+
+// сообщения о результате поиска
+export const RESULT_MESSAGE = {
+  SOMETHING_WRONG: 'Во время загрузки что-то пошло не так',
+  NOTHING_FOUND: 'Ничего не найдено',
+}
 
 // кол-во фильмов
 export const NUBER_OF_MOVIES_12 = 12;
@@ -37,22 +43,34 @@ export const NUBER_OF_MOVIES_5 = 5;
 export const NUBER_OF_MOVIES_ADD_3 = 3;
 export const NUBER_OF_MOVIES_ADD_2 = 2;
 
+// сохранить что-то в localStorage
+export const saveToLocalStorage = (nameOfLocalStorage, itemsInLocalStorage) => {
+  localStorage.setItem(`${nameOfLocalStorage}`, JSON.stringify(itemsInLocalStorage))
+}
+
+// взять что-то из localStorage
+export const getFromLocalStorage = (nameOfLocalStorage) => {
+  return JSON.parse(localStorage.getItem(`${nameOfLocalStorage}`));
+}
+
+// удаляю из localStorage
+export const deleteFromLocalStorage = (nameOfLocalStorage) => {
+  return localStorage.removeItem(`${nameOfLocalStorage}`);
+}
+
 // устанавливаю данные по умолчанию, если данных нет в LS или они просто куда-то пропали
-export const dataMovies = (movies) => {
-    const newMovies = movies.map((movie) => {
-      return {
-        movieId: `${movie.id}`,
-        country: `${movie.country ? `${movie.country}` : `Страна неизвестна`}`,
-        director: `${movie.director ? `${movie.director}` : `Режисер неизвестен`}`,
-        duration: `${movie.duration ? `${movie.duration}` : `0`}`,
-        year: `${movie.year ? `${movie.year}` : `0`}`,
-        description: `${movie.description ? `${movie.description}` : `Описание отсутствует.`}`,
-        image: `${movie.image && movie.image.url ? `https://api.nomoreparties.co${movie.image.url}` : `https://sun9-21.userapi.com/impg/OBUbO8dqPtjzr0BXCnW4hDXaWrNzse_DduMJfA/7VsYiVFOOW8.jpg`}`,
-        trailer: `${movie.trailerLink ?  `${movie.trailerLink}` : `https://youtube.com`}`,
-        thumbnail: `${movie.image && movie.image.formats && movie.image.formats.thumbnail && movie.image.formats.thumbnail.url ? `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}` : `https://sun9-21.userapi.com/impg/OBUbO8dqPtjzr0BXCnW4hDXaWrNzse_DduMJfA/7VsYiVFOOW8.jpg`}`,
-        nameRU: `${movie.nameRU}` || `Без названия`,
-        nameEN: `${movie.nameEN}` || `Без названия`
-      }
-    });
-    localStorage.setItem('moviesCurrent', JSON.stringify(newMovies) );
+export const dataMovies = (movie) => {
+  return {
+    country: movie.country,
+    director: movie.director,
+    duration: movie.duration,
+    year: movie.year,
+    description: movie.description,
+    image: `https://api.nomoreparties.co${movie.image.url}`,
+    movieId: movie.id,
+    trailerLink: movie.trailerLink,
+    thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+    nameRU: movie.nameRU,
+    nameEN: movie.nameEN,
   }
+}

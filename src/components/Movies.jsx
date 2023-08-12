@@ -1,139 +1,88 @@
 // --- база
 import { React, useEffect, useState } from 'react';
 import * as moviesApi from '../utils/MoviesApi';
-import * as mainApi from '../utils/MainApi';
 
 // --- модули
 import SearchForm from './SearchForm';
-import MoviesCardList from './MoviesCardList';
 import Footer from './Footer';
+import { saveToLocalStorage, getFromLocalStorage } from '../utils/constants/constants';
+import searchMovies from '../utils/functions/searchMovies';
 import { dataMovies } from '../utils/constants/constants';
+import SearchResults from './SearchResults';
 
 function Movies({
-  isSaved,
-  loggedIn,
   setLoading,
   savedMovies,
-  setSavedMovies,
-  foundMovies,
-  setFoundMovies,
-  handleFilterState,
-  onCheckbox,
+  onDelete,
+  onSave,
+  loading,
 }) {
 
-  // --- localStorage GET
-  const localStorageFoundMovies = localStorage.getItem('foundMovies')
-  const localStorageSavedMovie = localStorage.getItem('moviesSaved')
-  const localStorageMovies = JSON.parse(localStorage.getItem('moviesCurrent'));
+  // -- localStorage GET
+  const lsFoundMoviesList = getFromLocalStorage('foundMoviesList') ?? [];
+  const lsShortMoviesSelected = localStorage.getItem('toggleCheckbox') ?? false;
+  const lsSearchQuery = localStorage.getItem('searchQuery') ?? '';
 
-  // --- служебное
-  const [isCurrentlySaved, setIsCurentlySaved] = useState(false);
+  // -- фильмы
+  const [moviesList, setMoviesList] = useState(null);
+  const [foundMoviesList, setfoundMoviesList] = useState(lsFoundMoviesList);
+  const [isShortMoviesSelected, setShortMoviesSelected] = useState(lsShortMoviesSelected);
+  const [searchQuery, setSearchQuery] = useState(lsSearchQuery);
 
-  // загрузка данных с LocalStorage, если они есть и если польз-тель залогинился setItem
+  // -- служебные
+  const [isAnErrorHasOccured, setisAnErrorHasOccured] = useState(false);
+
   useEffect(() => {
-    if (!loggedIn) return;
-    const token = localStorage.getItem('token');
-    if (!token) return;
-    if (token) {
-      const foundMoviesList = JSON.parse(localStorageFoundMovies) || [];
-      const savedMoviesList = JSON.parse(localStorageSavedMovie) || [];
-      setFoundMovies(foundMoviesList);
-      setSavedMovies(savedMoviesList);
+    saveToLocalStorage('foundMoviesList', foundMoviesList);
+    localStorage.setItem('searchQuery', searchQuery)
+    localStorage.setItem('toggleCheckbox', isShortMoviesSelected);
+  }, [foundMoviesList, isShortMoviesSelected, searchQuery])
+
+  useEffect(() => {
+    if (moviesList) {
+      const foundMovies = searchMovies(moviesList, searchQuery, isShortMoviesSelected)
+      setfoundMoviesList(foundMovies);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
+  }, [moviesList, searchQuery, isShortMoviesSelected])
 
-
-  // сохранение фильма
-  function savingMovie(movie) {
-    const isSavedMovie = savedMovies.some(i => i.movieId === movie.movieId);
-
-    if (!isSavedMovie) {
-      mainApi
-        .uploadMovie(movie)
-        .then((newMovie) => {
-          setIsCurentlySaved(true);
-          localStorage.setItem('moviesSaved', JSON.stringify([newMovie, ...savedMovies]));
-          setSavedMovies([newMovie, ...savedMovies]);
-        })
-        .catch((err) => {
-          console.log(`Ошибка в Movies, savingMovie: ${err}`);
-        })
-    }
-  }
-
-  //удаление фильма
-  function delitingMovie(movie) {
-    const movieToDelete = savedMovies.find(i => i.movieId.toString() === movie.movieId.toString());
-    mainApi
-      .deleteMovie(movieToDelete._id)
-      .then(() => {
-        const newMovies = savedMovies.filter((movieSaved) => {
-          return movieSaved.movieId !== movieToDelete.movieId;
-        });
-        setSavedMovies(newMovies);
-        setIsCurentlySaved(false);
-        localStorage.setItem('moviesSaved', JSON.stringify(newMovies));
-      })
-      .catch((err) => {
-        console.log(`Ошибка в App, delitingMovie: ${err}`);
-      })
-  }
-
-  // обработка клика по кнопке В-избранное или Удалить
-  function handleClickFavOrDelBtn(movie) {
-    const isSavedMovie = savedMovies.some(i => i.movieId === movie.movieId);
-    if (!movie._id && !isSavedMovie) {
-      savingMovie(movie);
-    } else {
-      delitingMovie(movie);
-    }
-  }
-
-  // поиск фильмов по названию
-  function searchMovies(dataMovie) {
-    const foundMoviesList = localStorageMovies.filter(movie => {
-      return movie.nameRU.toLowerCase().includes(dataMovie.toLowerCase());
-    });
-    localStorage.setItem('foundMovies', JSON.stringify(foundMoviesList));
-    setFoundMovies(foundMoviesList);
-
-  }
-
-  // получаю карточки с не моего сервера
-  function getInitialMovies(movies) {
+  async function getMovies() {
+    setisAnErrorHasOccured(false);
     setLoading(true);
-    moviesApi
-      .getMovies()
-      .then((data) => {
-        dataMovies(data);
-        searchMovies(movies);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      })
+    try {
+      let movies = await moviesApi.getMovies();
+      movies = movies.map(dataMovies);
+      setMoviesList(movies);
 
-  }
+      setLoading(false);
 
-  // проверка фильма: сохранен или нет
-  function checkOnSaved(movie) {
-    const isSavedMovie = savedMovies ? savedMovies.find((i) => i.movieId.toString() === movie.movieId.toString()) : ``;
-    if (isSavedMovie) {
-      setIsCurentlySaved(true);
-    } else {
-      setIsCurentlySaved(false);
+    } catch {
+      console.log('Ошибка в getMovies, App')
+      setisAnErrorHasOccured(true)
+
+    } finally {
+      setLoading(false);
+      setisAnErrorHasOccured(false);
     }
   }
 
-  // обработка поиска
-  const handleSearchMovies = (movieToFind) => {
-    if (!localStorageMovies || localStorageMovies.length <= 0) {
-      getInitialMovies(movieToFind);
+  function toggleCheckbox(value) {
+    setShortMoviesSelected(value);
+    if (!moviesList) getMovies();
+  }
+
+  function submitSeacrh({ query, isShortMoviesSelected }) {
+    setShortMoviesSelected(isShortMoviesSelected);
+    setSearchQuery(query);
+    if (!moviesList) getMovies();
+  }
+
+  async function handleBtnClickOnMovie(movie) {
+    const isSavedAlready = savedMovies.some((savedMovie) => savedMovie.movieId === movie.movieId);
+    if (isSavedAlready) {
+      const savedMovie = savedMovies.find((savedMovie) => savedMovie.movieId === movie.movieId);
+      await onDelete(savedMovie);
     } else {
-      searchMovies(movieToFind);
+      await onSave(movie);
     }
   }
 
@@ -142,20 +91,21 @@ function Movies({
       <section className='movies movies_mediaScreen'>
         <div className='movies__box'>
           <SearchForm
-            onSearch={handleSearchMovies}
-            onCheckbox={onCheckbox}
-            handleFilterState={handleFilterState}
+            onSubmit={submitSeacrh}
+            toggleCheckbox={toggleCheckbox}
+            searchQuery={searchQuery}
+            isShortSelected={isShortMoviesSelected}
+            setLoading={setLoading}
           />
-          <MoviesCardList
-            isCurrentlySaved={isCurrentlySaved}
-            initialMovies={getInitialMovies}
-            foundMovies={foundMovies}
-            isSaved={isSaved}
-            onClick={handleClickFavOrDelBtn}
-            onDelete={delitingMovie}
-            checkOnSaved={checkOnSaved}
-            savedMovies={savedMovies}
-          />
+          {searchQuery &&
+            <SearchResults
+              foundMovies={foundMoviesList}
+              savedMovies={savedMovies}
+              onBtnOfMovie={handleBtnClickOnMovie}
+              isAnErrorHasOccured={isAnErrorHasOccured}
+              loading={loading}
+            />
+          }
         </div>
       </section>
       <Footer />

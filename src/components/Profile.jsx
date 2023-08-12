@@ -1,14 +1,29 @@
 import { React, useContext, useState } from 'react';
+import * as mainApi from '../utils/MainApi';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 
-function Profile({ logout, updateUserInfo }) {
+function Profile({ logout, setLoading, setCurrentUser }) {
+
+  // запрос обновления информации юзера
+  async function updateUserInfo(data) {
+    setLoading(true);
+    try {
+      const newUser = await mainApi.editUserInfo(data)
+      setCurrentUser(newUser);
+      setLoading(false);
+    } catch (err) {
+      console.log(`Ошибка в App, handleUpdateUser: ${err}`);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const [editMode, setEditMode] = useState(false);
   const currentUserContext = useContext(CurrentUserContext);
   const { email, name } = currentUserContext;
-  const { values, handleChange, errors, isValid, resetForm} = useFormAndValidation({
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation({
     email: '',
     name: '',
   });

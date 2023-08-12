@@ -138,6 +138,8 @@
 @import url(./blocks/moviesCard/__button/_favorite-btn/moviesCard__button_favorite-btn.css);
 @import url(./blocks/moviesCard/__button/_deleteFromFavorite-btn/moviesCard__deleteFromFavorite-btn.css);
 
+@import url(./blocks/notFoundMessage/notFoundMessage.css);
+
 /* searchForm  */
 @import url(./blocks/searchForm/searchForm.css);
 @import url(./blocks/searchForm/__submit-btn/searchForm__submit-btn.css);

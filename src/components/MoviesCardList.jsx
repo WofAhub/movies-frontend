@@ -1,9 +1,11 @@
-// база
+// --- база
 import { React, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import MoviesCard from './MoviesCard';
 import useWindowDimensions from '../hooks/useWindowDemension';
+import { useLocation } from 'react-router-dom';
 import { MOVIES } from '../utils/constants/constants';
+
+// --- модули
 import {
   NUBER_OF_MOVIES_12,
   NUBER_OF_MOVIES_8,
@@ -12,26 +14,21 @@ import {
   NUBER_OF_MOVIES_ADD_2,
 } from '../utils/constants/constants';
 
-function MoviesCardList({
-  isCurrentlySaved,
-  initialMovies,
-  getInitialMovies,
-  foundMovies,
-  isSaved,
-  onClick,
-  onDelete,
-  checkOnSaved,
-  savedMovies
-}) {
+function MoviesCardList({ setLoading, foundMovies, savedMovies, onBtnOfMovie, onSavedPage = false }) {
 
+  function isSavedMovie(movie) {
+    return savedMovies.some((savedMovie) => savedMovie.movieId === movie.movieId);
+  }
+
+  // --- юзы
   const location = useLocation();
   const pathMovies = location.pathname === MOVIES;
   const windowWidth = useWindowDimensions();
 
+  // -- отображение фильмов
   const [visibleMovies, setVisibleMovies] = useState(0);
 
-  const moviesToDisplay = !isSaved && foundMovies ? foundMovies.slice(0, visibleMovies) : foundMovies;
-
+  // определение размеров экрана
   const desktopSize = windowWidth > 1024;
   const tabletSize = windowWidth > 480 && windowWidth <= 768;
 
@@ -88,23 +85,19 @@ function MoviesCardList({
         )
     )
   }
-
   return (
     <>
       <ul className='moviesCardList moviesCardList_mediaScreen'>
         {
-          moviesToDisplay.slice(0, visibleMovies).map((movies) => {
-            const key = movies.movieId
+          foundMovies.slice(0, visibleMovies).map((movie) => {
             return (
-              <MoviesCard 
-                movies={movies} 
-                key={key} 
-                isSaved={isSaved} 
-                savedMovies={savedMovies} 
-                foundMovies={foundMovies} 
-                onClick={onClick}
-                onDelBtn={onDelete}
-                checkOnSaved={checkOnSaved}
+              <MoviesCard
+                movie={movie}
+                key={movie.movieId}
+                isSavedMovie={isSavedMovie(movie)}
+                onBtnOfMovie={onBtnOfMovie}
+                setLoading={setLoading}
+                onSavedPage={onSavedPage}
               />
             )
           })
