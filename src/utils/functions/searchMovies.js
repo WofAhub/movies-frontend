@@ -1,11 +1,11 @@
 import { DURATION_40 } from "../constants/constants";
 
-function searchMovies(movies, query, isShortMoviesSelected) {
+function searchMovies(movies, query, checkbox) {
     if (!movies.length) return movies;
 
     let foundMovies = movies;
 
-    if (isShortMoviesSelected) {
+    if (checkbox) {
         foundMovies = foundMovies.filter(
             (movie) => movie.duration <= DURATION_40,
         );

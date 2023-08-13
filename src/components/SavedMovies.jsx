@@ -14,8 +14,8 @@ function SavedMovies({
   const [searchQuery, setSearchQuery] = useState('');
   const [isShortMoviesSelected, setShortMoviesSelected] = useState(false);
 
-  function submitSearch({ query, isShortMoviesSelected }) {
-    setShortMoviesSelected(isShortMoviesSelected);
+  function submitSearch({ query, checkbox }) {
+    setShortMoviesSelected(checkbox);
     setSearchQuery(query);
   }
 
@@ -35,8 +35,7 @@ function SavedMovies({
   }, [savedMovies, searchQuery, isShortMoviesSelected]);
 
   async function handleBtnClickOnMovie(movie) {
-    const savedMovie = savedMovies.find(
-      (savedMovie) => savedMovie.movieId === movie.movieId,
+    const savedMovie = savedMovies.find((savedMovie) => savedMovie.movieId === movie.movieId,
     );
     await onDelete(savedMovie);
   }

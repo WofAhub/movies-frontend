@@ -20,7 +20,7 @@ function Movies({
 
   // -- localStorage GET
   const lsFoundMoviesList = getFromLocalStorage('foundMoviesList') ?? [];
-  const lsShortMoviesSelected = localStorage.getItem('toggleCheckbox') ?? false;
+  const lsShortMoviesSelected = JSON.parse(localStorage.getItem('toggleCheckbox')) ?? false;
   const lsSearchQuery = localStorage.getItem('searchQuery') ?? '';
 
   // -- фильмы
@@ -34,8 +34,8 @@ function Movies({
 
   useEffect(() => {
     saveToLocalStorage('foundMoviesList', foundMoviesList);
+    saveToLocalStorage('toggleCheckbox', isShortMoviesSelected);
     localStorage.setItem('searchQuery', searchQuery)
-    localStorage.setItem('toggleCheckbox', isShortMoviesSelected);
   }, [foundMoviesList, isShortMoviesSelected, searchQuery])
 
   useEffect(() => {
@@ -67,12 +67,13 @@ function Movies({
 
   function toggleCheckbox(value) {
     setShortMoviesSelected(value);
+    console.log('yeas')
     if (!moviesList) getMovies();
   }
 
-  function submitSeacrh({ query, isShortMoviesSelected }) {
-    setShortMoviesSelected(isShortMoviesSelected);
+  function submitSeacrh({ query, checkbox }) {
     setSearchQuery(query);
+    setShortMoviesSelected(checkbox);
     if (!moviesList) getMovies();
   }
 
@@ -95,7 +96,6 @@ function Movies({
             toggleCheckbox={toggleCheckbox}
             searchQuery={searchQuery}
             isShortSelected={isShortMoviesSelected}
-            setLoading={setLoading}
           />
           {searchQuery &&
             <SearchResults

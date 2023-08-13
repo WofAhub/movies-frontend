@@ -7,21 +7,22 @@ function SearchForm({ onSubmit, toggleCheckbox, searchQuery, isShortSelected }) 
 
   const valuesDefault = {
     query: searchQuery,
-    shortMovies: isShortSelected,
+    checkbox: isShortSelected,
   }
+  const [searchErrorMessage, setSearchErrorMessage] = useState('')
 
   const [values, isValid, handleChange] = useForm(
     valuesDefault,
     !!searchQuery,
-  );
-
-  const [searchErrorMessage, setSearchErrorMessage] = useState('')
+  )
 
   useEffect(() => {
-    if (values.shortMovies !== isShortSelected) {
-      toggleCheckbox(values.shortMovies)
+    if (values.checkbox !== isShortSelected) {
+      toggleCheckbox(values.checkbox)
     }
-  }, [values.shortMovies, toggleCheckbox, isShortSelected])
+  }, [values.checkbox, toggleCheckbox, isShortSelected])
+
+
 
   useEffect(() => {
     if (isValid) {
@@ -34,33 +35,35 @@ function SearchForm({ onSubmit, toggleCheckbox, searchQuery, isShortSelected }) 
     if (!isValid) {
       setSearchErrorMessage('Необходимо ввести название фильма')
       return;
+    } else {
+      onSubmit(values);
     }
-    onSubmit(values);
-    console.log('yes')
   }
 
   return (
-    <form onSubmit={submit} noValidate className='searchForm'>
-      <fieldset className='searchForm__form'>
-        <button type='submit' className='searchForm__submit-btn'>Поиск</button>
-        <input
-          className='searchForm__input'
-          name='query'
-          value={values.query}
-          type='search'
-          placeholder='Фильм'
-          onChange={handleChange}
-          required
-        >
-        </input>
+    <>
+      <form onSubmit={submit} noValidate className='searchForm'>
+        <fieldset className='searchForm__form'>
+          <button type='submit' className='searchForm__submit-btn'>Поиск</button>
+          <input
+            className='searchForm__input'
+            name='query'
+            value={values.query}
+            type='search'
+            placeholder='Фильм'
+            onChange={handleChange}
+            required
+          >
+          </input>
+        </fieldset>
         <FilterCheckbox
-          name='checkboxFilter'
-          checked={values.shortMovies}
+          name='filterCheckbox'
+          checked={values.checkbox}
           onChange={handleChange}
         />
-      </fieldset>
-      <span className='searchForm__span'>{searchErrorMessage}</span>
-    </form>
+        <span className='searchForm__span'>{searchErrorMessage}</span>
+      </form>
+    </>
   );
 }
 
