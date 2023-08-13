@@ -20,7 +20,7 @@ function MoviesCardList({ setLoading, foundMovies, savedMovies, onBtnOfMovie, on
     return savedMovies.some((savedMovie) => savedMovie.movieId === movie.movieId);
   }
 
-  // --- юзы
+  // -- юзы
   const location = useLocation();
   const pathMovies = location.pathname === MOVIES;
   const windowWidth = useWindowDimensions();
@@ -28,7 +28,7 @@ function MoviesCardList({ setLoading, foundMovies, savedMovies, onBtnOfMovie, on
   // -- отображение фильмов
   const [visibleMovies, setVisibleMovies] = useState(0);
 
-  // определение размеров экрана
+  // -- определение размеров экрана
   const desktopSize = windowWidth > 1024;
   const tabletSize = windowWidth > 480 && windowWidth <= 768;
 

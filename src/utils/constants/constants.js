@@ -43,22 +43,12 @@ export const NUBER_OF_MOVIES_5 = 5;
 export const NUBER_OF_MOVIES_ADD_3 = 3;
 export const NUBER_OF_MOVIES_ADD_2 = 2;
 
-// сохранить что-то в localStorage
-export const saveToLocalStorage = (nameOfLocalStorage, itemsInLocalStorage) => {
-  localStorage.setItem(`${nameOfLocalStorage}`, JSON.stringify(itemsInLocalStorage))
-}
-
-// взять что-то из localStorage
-export const getFromLocalStorage = (nameOfLocalStorage) => {
-  return JSON.parse(localStorage.getItem(`${nameOfLocalStorage}`));
-}
-
 // удаляю из localStorage
 export const deleteFromLocalStorage = (nameOfLocalStorage) => {
   return localStorage.removeItem(`${nameOfLocalStorage}`);
 }
 
-// устанавливаю данные по умолчанию, если данных нет в LS или они просто куда-то пропали
+// устанавливаю данные
 export const dataMovies = (movie) => {
   return {
     country: movie.country,
