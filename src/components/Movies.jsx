@@ -5,7 +5,7 @@ import * as moviesApi from '../utils/MoviesApi';
 // --- модули
 import SearchForm from './SearchForm';
 import Footer from './Footer';
-import { saveToLocalStorage, getFromLocalStorage } from '../utils/constants/constants';
+// import { saveToLocalStorage, getFromLocalStorage } from '../utils/constants/constants';
 import searchMovies from '../utils/functions/searchMovies';
 import { dataMovies } from '../utils/constants/constants';
 import SearchResults from './SearchResults';
@@ -19,28 +19,31 @@ function Movies({
 }) {
 
   // -- localStorage GET
-  const lsFoundMoviesList = getFromLocalStorage('foundMoviesList') ?? [];
-  const lsShortMoviesSelected = JSON.parse(localStorage.getItem('toggleCheckbox')) ?? false;
-  const lsSearchQuery = localStorage.getItem('searchQuery') ?? '';
+  const defaultMoviesList = JSON.parse(localStorage.getItem('foundMoviesList')) ?? [];
+  const defaultMoviesSelected = JSON.parse(localStorage.getItem('toggleCheckbox')) ?? false;
+  const defaultSearchQuery = localStorage.getItem('searchQuery') ?? '';
 
   // -- фильмы
   const [moviesList, setMoviesList] = useState(null);
-  const [foundMoviesList, setfoundMoviesList] = useState(lsFoundMoviesList);
-  const [isShortMoviesSelected, setShortMoviesSelected] = useState(lsShortMoviesSelected);
-  const [searchQuery, setSearchQuery] = useState(lsSearchQuery);
+  const [foundMoviesList, setfoundMoviesList] = useState(defaultMoviesList);
+  const [isShortMoviesSelected, setShortMoviesSelected] = useState(defaultMoviesSelected);
+  const [searchQuery, setSearchQuery] = useState(defaultSearchQuery);
 
   // -- служебные
   const [isAnErrorHasOccured, setisAnErrorHasOccured] = useState(false);
 
   useEffect(() => {
-    saveToLocalStorage('foundMoviesList', foundMoviesList);
-    saveToLocalStorage('toggleCheckbox', isShortMoviesSelected);
+    localStorage.setItem('foundMoviesList',  JSON.stringify(foundMoviesList));
     localStorage.setItem('searchQuery', searchQuery)
+    localStorage.setItem('toggleCheckbox', isShortMoviesSelected);
   }, [foundMoviesList, isShortMoviesSelected, searchQuery])
 
   useEffect(() => {
     if (moviesList) {
-      const foundMovies = searchMovies(moviesList, searchQuery, isShortMoviesSelected)
+      const foundMovies = searchMovies(
+        moviesList,
+        searchQuery,
+        isShortMoviesSelected)
       setfoundMoviesList(foundMovies);
     }
   }, [moviesList, searchQuery, isShortMoviesSelected])
@@ -65,15 +68,14 @@ function Movies({
     }
   }
 
-  function toggleCheckbox(value) {
-    setShortMoviesSelected(value);
-    console.log('yeas')
+  function submitSearch({ searchQuery, isShortMoviesSelected }) {
+    setSearchQuery(searchQuery);
+    setShortMoviesSelected(isShortMoviesSelected);
     if (!moviesList) getMovies();
   }
 
-  function submitSeacrh({ query, checkbox }) {
-    setSearchQuery(query);
-    setShortMoviesSelected(checkbox);
+  function toggleCheckbox(value) {
+    setShortMoviesSelected(value);
     if (!moviesList) getMovies();
   }
 
@@ -92,10 +94,10 @@ function Movies({
       <section className='movies movies_mediaScreen'>
         <div className='movies__box'>
           <SearchForm
-            onSubmit={submitSeacrh}
+            onSubmit={submitSearch}
             toggleCheckbox={toggleCheckbox}
-            searchQuery={searchQuery}
-            isShortSelected={isShortMoviesSelected}
+            defaultSearchQuery={searchQuery}
+            defaultMoviesSelected={isShortMoviesSelected}
           />
           {searchQuery &&
             <SearchResults

@@ -15,7 +15,6 @@ function SearchResults({
   onBtnOfMovie,
   isAnErrorHasOccured,
   onSavedPage = false,
-  moviesList,
 }) {
   return isAnErrorHasOccured ? (
     <MessageError messageError={RESULT_MESSAGE.SOMETHING_WRONG} />
@@ -29,7 +28,6 @@ function SearchResults({
       savedMovies={savedMovies}
       onBtnOfMovie={onBtnOfMovie}
       onSavedPage={onSavedPage}
-      moviesList={moviesList}
     />
   );
 }

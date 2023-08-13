@@ -15,7 +15,7 @@ import {
 } from '../utils/constants/constants';
 
 function MoviesCardList({ setLoading, foundMovies, savedMovies, onBtnOfMovie, onSavedPage = false }) {
-
+  
   function isSavedMovie(movie) {
     return savedMovies.some((savedMovie) => savedMovie.movieId === movie.movieId);
   }

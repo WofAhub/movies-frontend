@@ -14,9 +14,9 @@ function SavedMovies({
   const [searchQuery, setSearchQuery] = useState('');
   const [isShortMoviesSelected, setShortMoviesSelected] = useState(false);
 
-  function submitSearch({ query, checkbox }) {
-    setShortMoviesSelected(checkbox);
-    setSearchQuery(query);
+  function submitSearch({ searchQuery, isShortMoviesSelected }) {
+    setSearchQuery(searchQuery);
+    setShortMoviesSelected(isShortMoviesSelected);
   }
 
   function toggleCheckbox(value) {
@@ -47,8 +47,8 @@ function SavedMovies({
           <SearchForm
             onSubmit={submitSearch}
             toggleCheckbox={toggleCheckbox}
-            searchQuery={searchQuery}
-            isShortSelected={isShortMoviesSelected}
+            defaultSearchQuery={searchQuery}
+            defaultMoviesSelected={isShortMoviesSelected}
           />
           <SearchResults
             foundMovies={foundMovies}

@@ -3,26 +3,29 @@ import { React, useState, useEffect } from 'react';
 import FilterCheckbox from './FilterCheckbox';
 import useForm from '../hooks/useForm';
 
-function SearchForm({ onSubmit, toggleCheckbox, searchQuery, isShortSelected }) {
+function SearchForm({
+  onSubmit,
+  toggleCheckbox,
+  defaultSearchQuery,
+  defaultMoviesSelected
+}) {
 
   const valuesDefault = {
-    query: searchQuery,
-    checkbox: isShortSelected,
+    searchQuery: defaultSearchQuery,
+    isShortMoviesSelected: defaultMoviesSelected,
   }
   const [searchErrorMessage, setSearchErrorMessage] = useState('')
 
   const [values, isValid, handleChange] = useForm(
     valuesDefault,
-    !!searchQuery,
+    !!defaultSearchQuery,
   )
 
   useEffect(() => {
-    if (values.checkbox !== isShortSelected) {
-      toggleCheckbox(values.checkbox)
+    if (values.isShortMoviesSelected !== defaultMoviesSelected) {
+      toggleCheckbox(values.isShortMoviesSelected)
     }
-  }, [values.checkbox, toggleCheckbox, isShortSelected])
-
-
+  }, [values.isShortMoviesSelected, toggleCheckbox, defaultMoviesSelected])
 
   useEffect(() => {
     if (isValid) {
@@ -35,9 +38,8 @@ function SearchForm({ onSubmit, toggleCheckbox, searchQuery, isShortSelected }) 
     if (!isValid) {
       setSearchErrorMessage('Необходимо ввести название фильма')
       return;
-    } else {
-      onSubmit(values);
     }
+    onSubmit(values);
   }
 
   return (
@@ -47,8 +49,8 @@ function SearchForm({ onSubmit, toggleCheckbox, searchQuery, isShortSelected }) 
           <button type='submit' className='searchForm__submit-btn'>Поиск</button>
           <input
             className='searchForm__input'
-            name='query'
-            value={values.query}
+            name='searchQuery'
+            value={values.searchQuery}
             type='search'
             placeholder='Фильм'
             onChange={handleChange}
@@ -57,8 +59,8 @@ function SearchForm({ onSubmit, toggleCheckbox, searchQuery, isShortSelected }) 
           </input>
         </fieldset>
         <FilterCheckbox
-          name='filterCheckbox'
-          checked={values.checkbox}
+          name='isShortMoviesSelected'
+          checked={values.isShortMoviesSelected}
           onChange={handleChange}
         />
         <span className='searchForm__span'>{searchErrorMessage}</span>

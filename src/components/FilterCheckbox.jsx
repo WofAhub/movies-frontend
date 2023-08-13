@@ -1,17 +1,16 @@
 import React from "react";
 
-function FilterCheckbox({ onChange, checked, name, disabled }) {
+function FilterCheckbox({ checked, onChange, name }) {
 
   return (
     <label htmlFor='checkboxId' className='filterCheckbox'>
       <input
+        checked={checked}
+        onChange={onChange}
         name={name}
         id='checkboxId'
         type='checkbox'
         className='filterCheckbox__input'
-        onChange={onChange}
-        disabled={disabled}
-        checked={checked}
       />
       <span className='filterCheckbox__span'>Короткометражки</span>
     </label>
