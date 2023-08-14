@@ -1,5 +1,5 @@
 // база
-import React from 'react';
+import { React } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as mainApi from '../utils/MainApi';
 
@@ -7,6 +7,7 @@ import * as mainApi from '../utils/MainApi';
 import AuthAndRegister from './AuthAndRegister';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 import { MOVIES } from '../utils/constants/constants';
+import { EMAIL_PATTERT } from '../utils/constants/constants';
 
 // ошибки
 import { UNAUTHORIZED_ERROR } from '../errors/UnauthorizedError';
@@ -67,6 +68,7 @@ function Login({ setErrorMessage, setLoggedIn, setLoading, errorMessage }) {
             <input
               id='email'
               name='email'
+              pattern={EMAIL_PATTERT}
               type='email'
               className={errors.email ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
               placeholder='Ваш e-mail'

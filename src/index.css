@@ -137,6 +137,7 @@
 @import url(./blocks/moviesCard/__button/moviesCard__button.css);
 @import url(./blocks/moviesCard/__button/_favorite-btn/moviesCard__button_favorite-btn.css);
 @import url(./blocks/moviesCard/__button/_deleteFromFavorite-btn/moviesCard__deleteFromFavorite-btn.css);
+@import url(./blocks/moviesCard/__savedMovie/moviesCard__savedMovie.css);
 
 @import url(./blocks/notFoundMessage/notFoundMessage.css);
 

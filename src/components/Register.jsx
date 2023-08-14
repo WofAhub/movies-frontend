@@ -7,36 +7,27 @@ import * as mainApi from '../utils/MainApi';
 import AuthAndRegister from './AuthAndRegister';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 import { SIGN_IN } from '../utils/constants/constants';
+import { EMAIL_PATTERT } from '../utils/constants/constants';
 
 // ошибки
-import { DUBLICATE_ERROR } from '../errors/DublicateError';
-import { UNHANDLE_ERROR } from '../errors/UnhandleError';
-import { ERROR_MESSAGES } from '../utils/constants/constants';
 
-function Register({ setLoading, errorMessage, setErrorMessage }) {
+
+function Register({ setLoading, errorMessage, setErrorMessage, setCurrentUser }) {
 
   const navigate = useNavigate();
 
   async function register({ name, email, password }) {
     setLoading(true);
     try {
-      const res = await mainApi.register(name, email, password)
+      await mainApi.register(name, email, password)
       setLoading(false);
       setErrorMessage('');
-      console.log(res, 'Это res из register в App.jsx')
       navigate(SIGN_IN, { replace: true });
     } catch (err) {
-      let errorMessage;
-      if (DUBLICATE_ERROR) {
-        errorMessage = ERROR_MESSAGES.EMAIL_IS_EXISTS_ALREADY;
-      } else if (UNHANDLE_ERROR) {
-        errorMessage = ERROR_MESSAGES.ERROR_SERVER;
-      } else {
-        errorMessage = ERROR_MESSAGES.ERROR_SIGNUP;
-      }
+      console.log(err)
       setLoading(false);
-      setErrorMessage(errorMessage);
-      console.log(`Ошибка в регистрации, в App: ${err}`)
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -86,6 +77,7 @@ function Register({ setLoading, errorMessage, setErrorMessage }) {
               id='email'
               name='email'
               type='email'
+              pattern={EMAIL_PATTERT}
               className={errors.email ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
               placeholder='Ваш e-mail'
               value={values?.email || ''}

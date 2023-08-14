@@ -1,6 +1,6 @@
 // --- база
 import { React, useState, useEffect } from 'react';
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ProtectedRoute from './ProtectedRoute';
 import * as mainApi from '../utils/MainApi';
@@ -61,7 +61,7 @@ function App() {
         setSavedMovies(savedMovies);
         if (res) {
           setLoggedIn(true);
-          navigate({ BASE_ROUTE, replace: false });
+          navigate({ replace: false });
         }
       } catch (err) {
         console.log(`Ошибка в checkToken, в App: ${err.status}`);
@@ -148,22 +148,31 @@ function App() {
           <Route
             path={SIGN_IN}
             element={
-              <Login
-                setErrorMessage={setErrorMessage}
-                setLoggedIn={setLoggedIn}
-                setLoading={setLoading}
-                errorMessage={errorMessage}
-              />
+              loggedIn ? (
+                <Navigate to={MOVIES} replace />
+              ) : (
+                <Login
+                  setErrorMessage={setErrorMessage}
+                  setLoggedIn={setLoggedIn}
+                  setLoading={setLoading}
+                  setCurrentUser={setCurrentUser}
+                />
+              )
             }
           />
           <Route
             path={SIGN_UP}
             element={
-              <Register
-                setLoading={setLoading}
-                errorMessage={errorMessage}
-                setErrorMessage={setErrorMessage}
-              />
+              loggedIn ? (
+                <Navigate to={MOVIES} replace />
+              ) : (
+                <Register
+                  setLoading={setLoading}
+                  errorMessage={errorMessage}
+                  setErrorMessage={setErrorMessage}
+                  setLoggedIn={setLoggedIn}
+                />
+              )
             }
           />
           <Route
@@ -206,6 +215,7 @@ function App() {
                 element={Profile}
                 loggedIn={loggedIn}
                 setLoading={setLoading}
+                currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
                 logout={logOut}
               />

@@ -12,11 +12,6 @@
 
   background-color: transparent;
 
-  background-image: url(../../../images/arrow_back.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 0;
-
   border: none;
 
   margin: 0;
@@ -26,7 +21,5 @@
 }
 
 .notFoundPage__back-btn:hover {
-  background-size: 19px;
-  font-size: 1px;
-  color: transparent;
+  color: black;
 }
