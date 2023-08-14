@@ -1,5 +1,7 @@
-// база
+// --- база
 import { React, useState, useEffect } from 'react';
+
+// -- модули
 import FilterCheckbox from './FilterCheckbox';
 import useForm from '../hooks/useForm';
 

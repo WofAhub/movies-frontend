@@ -1,3 +1,4 @@
+// --- база
 import React from 'react';
 import promoImg from '../images/Spiral.svg';
 

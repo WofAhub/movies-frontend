@@ -1,16 +1,16 @@
-// база
+// --- база
 import { React } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as mainApi from '../utils/MainApi';
 
-// модули
+// --- модули
 import AuthAndRegister from './AuthAndRegister';
 import useFormAndValidation from '../hooks/useFormAndValidation';
-import { ERROR_MESSAGES, MOVIES } from '../utils/constants/constants';
-import { EMAIL_PATTERT } from '../utils/constants/constants';
+import { ERROR_MESSAGES, MOVIES, EMAIL_PATTERT, PLACEHOLDERS, LABELS_FOR_FORMS } from '../utils/constants/constants';
 
-function Register({ setLoading, setLoggedIn, setCurrentUser, errorMessage, setErrorMessage }) {
+function Register({ setLoading, setLoggedIn, errorMessage, setErrorMessage }) {
 
+  // -- юзы
   const navigate = useNavigate();
 
   function handleErrors(err) {
@@ -77,7 +77,7 @@ function Register({ setLoading, setLoggedIn, setCurrentUser, errorMessage, setEr
         <>
           <fieldset className='authAndRegisterImputs__fieldset'>
             <label htmlFor='name' className='authAndRegisterImputs__label'>
-              Имя
+              {LABELS_FOR_FORMS.NAME_LABEL}
             </label>
             <input
               id='name'
@@ -86,7 +86,7 @@ function Register({ setLoading, setLoggedIn, setCurrentUser, errorMessage, setEr
               minLength='2'
               maxLength='40'
               className={errors.name ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
-              placeholder='Ваше имя'
+              placeholder={PLACEHOLDERS.NAME}
               value={values?.name || ''}
               onChange={handleChange}
               required
@@ -95,7 +95,7 @@ function Register({ setLoading, setLoggedIn, setCurrentUser, errorMessage, setEr
           </fieldset>
           <fieldset className='authAndRegisterImputs__fieldset'>
             <label htmlFor='email' className='authAndRegisterImputs__label'>
-              E-mail
+              {LABELS_FOR_FORMS.EMAIL_LABEL}
             </label>
             <input
               id='email'
@@ -103,7 +103,7 @@ function Register({ setLoading, setLoggedIn, setCurrentUser, errorMessage, setEr
               type='email'
               pattern={EMAIL_PATTERT}
               className={errors.email ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
-              placeholder='Ваш e-mail'
+              placeholder={PLACEHOLDERS.EMAIL}
               value={values?.email || ''}
               onChange={handleChange}
               required
@@ -112,14 +112,14 @@ function Register({ setLoading, setLoggedIn, setCurrentUser, errorMessage, setEr
           </fieldset>
           <fieldset className='authAndRegisterImputs__fieldset'>
             <label htmlFor='password' className='authAndRegisterImputs__label'>
-              Пароль
+              {LABELS_FOR_FORMS.PASSWORD_LABEL}
             </label>
             <input
               id='password'
               name='password'
               type='password'
               className={errors.password ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
-              placeholder='Придумайте надёжный пароль'
+              placeholder={PLACEHOLDERS.PASSWORD_REG}
               value={values?.password || ''}
               onChange={handleChange}
               required

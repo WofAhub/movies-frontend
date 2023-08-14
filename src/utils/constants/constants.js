@@ -79,3 +79,24 @@ export const dataMovies = (movie) => {
     nameEN: movie.nameEN,
   }
 }
+
+// текстовые логотипы
+export const LOGOS_TEXT = {
+  GITHUB: 'GitHub',
+  YANDEX_PRAKTIKUM: 'Яндекс.Практикум'
+}
+
+// плейсхолдеры
+export const PLACEHOLDERS = {
+EMAIL: 'Ваш e-mail',
+NAME: 'Ваше имя',
+PASSWORD_REG: 'Придумайте надёжный пароль',
+PASSWORD_LOG: 'Пароль'
+}
+
+// лейблы для форм
+export const LABELS_FOR_FORMS = {
+  EMAIL_LABEL: 'E-mail',
+  NAME_LABEL: 'Имя',
+  PASSWORD_LABEL: 'Пароль'
+}

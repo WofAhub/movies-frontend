@@ -1,7 +1,8 @@
-//база
+// --- база
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
+// -- модули
 import { MOVIES, SAVED_MOVIES } from '../utils/constants/constants'
 
 function MoviesCard({ movie, isSavedMovie, onBtnOfMovie }) {

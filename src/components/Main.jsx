@@ -1,5 +1,7 @@
+// --- база
 import React from 'react';
 
+// -- модули
 import Promo from './Promo';
 import AboutProject from './AboutProject';
 import Techs from './Techs';

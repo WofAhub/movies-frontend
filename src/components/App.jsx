@@ -18,13 +18,8 @@ import NavTab from './NavTab';
 import Preloader from './Preloader';
 import { deleteFromLocalStorage } from '../utils/constants/constants';
 import {
-  PATH_404,
-  PROFILE,
-  SAVED_MOVIES,
-  MOVIES,
-  SIGN_IN,
-  SIGN_UP,
-  BASE_ROUTE
+  PATH_404, PROFILE, SAVED_MOVIES, MOVIES,
+  SIGN_IN, SIGN_UP, BASE_ROUTE
 } from '../utils/constants/constants';
 
 function App() {
@@ -33,7 +28,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
-  // сохраненные фильмы
+  // -- сохраненные фильмы
   const [savedMovies, setSavedMovies] = useState([]);
 
   // -- служебное

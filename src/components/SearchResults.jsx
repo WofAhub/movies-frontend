@@ -1,3 +1,4 @@
+// -- модули
 import { RESULT_MESSAGE } from '../utils/constants/constants';
 import MoviesCardList from './MoviesCardList';
 import Preloader from './Preloader';

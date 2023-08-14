@@ -1,11 +1,15 @@
+// --- база
 import React from "react";
 import { NavLink } from 'react-router-dom';
 
+// -- модули
 import Header from "./Header";
 import useWindowDimensions from '../hooks/useWindowDemension'
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 function Navigation() {
+
+  // -- стейт бургер меню
   const [isBurgerMenuOpen, setBurgerMenuOpen] = React.useState(false);
 
   const isMobileWidth = useWindowDimensions() <= 898;

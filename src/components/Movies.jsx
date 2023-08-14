@@ -5,7 +5,6 @@ import * as moviesApi from '../utils/MoviesApi';
 // --- модули
 import SearchForm from './SearchForm';
 import Footer from './Footer';
-// import { saveToLocalStorage, getFromLocalStorage } from '../utils/constants/constants';
 import searchMovies from '../utils/functions/searchMovies';
 import { dataMovies } from '../utils/constants/constants';
 import SearchResults from './SearchResults';

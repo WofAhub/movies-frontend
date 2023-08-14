@@ -1,3 +1,4 @@
+// --- база
 import React from 'react';
 
 function Preloader({ loading }) {

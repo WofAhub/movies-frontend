@@ -1,6 +1,8 @@
+// --- база
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// -- модули
 import { LINK_PORTFOLIO_1, LINK_PORTFOLIO_2, LINK_PORTFOLIO_3 } from '../utils/constants/constants';
 
 function Portfolio() {

@@ -1,6 +1,8 @@
+// --- база
 import { React, useContext, useEffect, useState } from 'react';
 import * as mainApi from '../utils/MainApi';
 
+// -- модули
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 import { RESULT_UPDATE_PROFILE } from '../utils/constants/constants';
@@ -8,10 +10,13 @@ import { ERROR_MESSAGES } from '../utils/constants/constants';
 
 function Profile({ logout, setLoading, setCurrentUser, errorMessage, setErrorMessage }) {
 
+  // -- стейты
   const [updateMessage, setUpdateMessage] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const currentUserContext = useContext(CurrentUserContext);
   const { email, name } = currentUserContext;
+
+  // -- юзы
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation({
     email,
     name

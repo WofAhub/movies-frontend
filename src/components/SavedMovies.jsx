@@ -1,5 +1,7 @@
+// --- база
 import { React, useState, useEffect } from "react";
 
+// -- модули
 import SearchResults from "./SearchResults";
 import SearchForm from './SearchForm';
 import Footer from './Footer';
@@ -10,6 +12,7 @@ function SavedMovies({
   savedMovies
 }) {
 
+  // -- стейт фильмов, запроса, тоггла
   const [foundMovies, setFoundMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isShortMoviesSelected, setShortMoviesSelected] = useState(false);

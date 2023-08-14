@@ -1,19 +1,19 @@
-// база
+// --- база
 import { React } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as mainApi from '../utils/MainApi';
 
-// модули
+// --- модули
 import AuthAndRegister from './AuthAndRegister';
 import useFormAndValidation from '../hooks/useFormAndValidation';
-import { MOVIES } from '../utils/constants/constants';
-import { EMAIL_PATTERT } from '../utils/constants/constants';
+import { MOVIES, EMAIL_PATTERT, PLACEHOLDERS, LABELS_FOR_FORMS } from '../utils/constants/constants';
 
-// ошибки
+// --- ошибки
 import { ERROR_MESSAGES } from '../utils/constants/constants';
 
 function Login({ setLoggedIn, setLoading, errorMessage, setErrorMessage }) {
 
+  // -- юзы
   const navigate = useNavigate();
 
   function handleErrors(err) {
@@ -67,7 +67,7 @@ function Login({ setLoggedIn, setLoading, errorMessage, setErrorMessage }) {
         <>
           <fieldset className='authAndRegisterImputs__fieldset'>
             <label htmlFor='email' className='authAndRegisterImputs__label'>
-              E-mail
+              {LABELS_FOR_FORMS.EMAIL_LABEL}
             </label>
             <input
               id='email'
@@ -75,7 +75,7 @@ function Login({ setLoggedIn, setLoading, errorMessage, setErrorMessage }) {
               pattern={EMAIL_PATTERT}
               type='email'
               className={errors.email ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
-              placeholder='Ваш e-mail'
+              placeholder={PLACEHOLDERS.EMAIL}
               value={values?.email || ''}
               onChange={handleChange}
               required
@@ -84,7 +84,7 @@ function Login({ setLoggedIn, setLoading, errorMessage, setErrorMessage }) {
           </fieldset>
           <fieldset className='authAndRegisterImputs__fieldset authAndRegisterImputs__fieldset_margin'>
             <label htmlFor='password' className='authAndRegisterImputs__label'>
-              Пароль
+              {LABELS_FOR_FORMS.PASSWORD_LABEL}
             </label>
             <input
               id='password'
@@ -93,7 +93,7 @@ function Login({ setLoggedIn, setLoading, errorMessage, setErrorMessage }) {
               className={errors.password ? 'authAndRegisterImputs__input authAndRegisterImputs__input_error' : 'authAndRegisterImputs__input'}
               value={values?.password || ''}
               onChange={handleChange}
-              placeholder='Пароль'
+              placeholder={PLACEHOLDERS.PASSWORD_LOG}
               required
             />
             <span className='authAndRegisterImputs__errorMessage'>{errors.password}</span>
