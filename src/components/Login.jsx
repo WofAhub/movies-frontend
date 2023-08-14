@@ -10,13 +10,25 @@ import { MOVIES } from '../utils/constants/constants';
 import { EMAIL_PATTERT } from '../utils/constants/constants';
 
 // ошибки
-import { UNAUTHORIZED_ERROR } from '../errors/UnauthorizedError';
-import { UNHANDLE_ERROR } from '../errors/UnhandleError';
 import { ERROR_MESSAGES } from '../utils/constants/constants';
 
-function Login({ setErrorMessage, setLoggedIn, setLoading, errorMessage }) {
+function Login({ setLoggedIn, setLoading, errorMessage, setErrorMessage }) {
 
   const navigate = useNavigate();
+
+  function handleErrors(err) {
+    switch (err) {
+      case 'Ошибка: 401':
+        setErrorMessage(ERROR_MESSAGES.WRONG_EMAIL_OR_PASSWORD)
+        break;
+      case 'Ошибка: 500':
+        setErrorMessage(ERROR_MESSAGES.ERROR_SIGNIN)
+        break;
+      default:
+        setErrorMessage(ERROR_MESSAGES.ERROR_SERVER)
+        console.log(err)
+    }
+  }
 
   async function login({ email, password }) {
     setLoading(true);
@@ -28,17 +40,9 @@ function Login({ setErrorMessage, setLoggedIn, setLoading, errorMessage }) {
       setLoggedIn(true);
       navigate(MOVIES, { replace: true });
     } catch (err) {
-      let errorMessage;
-      if (UNAUTHORIZED_ERROR) {
-        errorMessage = ERROR_MESSAGES.WRONG_EMAIL_OR_PASSWORD;
-      } else if (UNHANDLE_ERROR) {
-        errorMessage = ERROR_MESSAGES.ERROR_SERVER;
-      } else {
-        errorMessage = ERROR_MESSAGES.ERROR_SIGNIN;
-      }
+      handleErrors(err);
+    } finally {
       setLoading(false);
-      setErrorMessage(errorMessage);
-      console.log(`Ошибка в App, loginUser: ${err}`);
     }
   }
 

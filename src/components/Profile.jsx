@@ -1,29 +1,12 @@
-import { React, useContext, useState } from 'react';
+import { React, useContext, useEffect, useState } from 'react';
 import * as mainApi from '../utils/MainApi';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 import { RESULT_UPDATE_PROFILE } from '../utils/constants/constants';
+import { ERROR_MESSAGES } from '../utils/constants/constants';
 
-function Profile({ logout, setLoading, setCurrentUser }) {
-
-  // запрос обновления информации юзера
-  async function updateUserInfo(data) {
-    if (values.email === email && values.name === name) {
-      return;
-    }
-    setLoading(true);
-    try {
-      const newUser = await mainApi.editUserInfo(data)
-      setCurrentUser(newUser);
-      setLoading(false);
-      showSuccessMessage()
-    } catch (err) {
-      console.log(`Ошибка в App, handleUpdateUser: ${err}`);
-    } finally {
-      setLoading(false);
-    }
-  }
+function Profile({ logout, setLoading, setCurrentUser, errorMessage, setErrorMessage }) {
 
   const [updateMessage, setUpdateMessage] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -33,6 +16,49 @@ function Profile({ logout, setLoading, setCurrentUser }) {
     email,
     name
   });
+
+  useEffect(() => {
+    if (currentUserContext) resetForm(currentUserContext);
+  }, [currentUserContext, resetForm])
+
+  useEffect(() => {
+    if (
+      values.name === name &&
+      values.email === email
+    ) {
+      resetForm(values, {}, false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values])
+
+  function handleErrors(err) {
+    switch (err) {
+      case 'Ошибка: 409':
+        setErrorMessage(ERROR_MESSAGES.EMAIL_IS_EXISTS_ALREADY)
+        break;
+      case 'Ошибка: 500':
+        setErrorMessage(ERROR_MESSAGES.UPDATE_ERROR)
+        break;
+      default:
+        setErrorMessage(ERROR_MESSAGES.ERROR_SERVER)
+        console.log(err)
+    }
+  }
+
+  // запрос обновления информации юзера
+  async function updateUserInfo(data) {
+    setLoading(true);
+    try {
+      const newUser = await mainApi.editUserInfo(data)
+      setCurrentUser(newUser);
+      setLoading(false);
+      showSuccessMessage()
+    } catch (err) {
+      handleErrors(err)
+    } finally {
+      setLoading(false);
+    }
+  }
 
   function turnOnEditMode() {
     setEditMode(true);
@@ -77,7 +103,7 @@ function Profile({ logout, setLoading, setCurrentUser }) {
           maxLength='40'
           className={editMode ? 'profile__paragraph profile__paragraph_nameRight profile__paragraph_active' : 'profile__paragraph profile__paragraph_nameRight'}
           placeholder={editMode ? name : name}
-          value={values?.name ?? name}
+          value={values.name ?? name}
           onChange={handleChange}
           required
         />
@@ -89,7 +115,7 @@ function Profile({ logout, setLoading, setCurrentUser }) {
           type='email'
           className={editMode ? 'profile__paragraph profile__paragraph_emailRight profile__paragraph_active' : 'profile__paragraph profile__paragraph_emailRight'}
           placeholder={editMode ? email : email}
-          value={values?.email ?? email}
+          value={values.email ?? email}
           onChange={handleChange}
           required
         />
@@ -100,9 +126,7 @@ function Profile({ logout, setLoading, setCurrentUser }) {
                 type='submit'
                 className={!isValid
                   ? 'profile__button profile__button_disable button'
-                  : values.email === email && values.name === name
-                    ? 'profile__button profile__button_disable button'
-                    : 'profile__button button'
+                  : 'profile__button button'
                 }>Сохранить</button>
               <button type='button' onClick={turnOffEditMode} className='profile__button button'>Отмена</button>
             </div>
@@ -112,7 +136,7 @@ function Profile({ logout, setLoading, setCurrentUser }) {
           <button type='button' onClick={logout} className='profile__button button'>Выйти из аккаунта</button>
         </div>
       </form>
-      {/* <span>{errorMessage}</span> */}
+      <span>{errorMessage}</span>
     </section>
   );
 };

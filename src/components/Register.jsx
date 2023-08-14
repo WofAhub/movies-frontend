@@ -6,26 +6,46 @@ import * as mainApi from '../utils/MainApi';
 // модули
 import AuthAndRegister from './AuthAndRegister';
 import useFormAndValidation from '../hooks/useFormAndValidation';
-import { SIGN_IN } from '../utils/constants/constants';
+import { ERROR_MESSAGES, MOVIES, SIGN_IN } from '../utils/constants/constants';
 import { EMAIL_PATTERT } from '../utils/constants/constants';
 
-// ошибки
-
-
-function Register({ setLoading, errorMessage, setErrorMessage, setCurrentUser }) {
+function Register({ setLoading, setLoggedIn, setCurrentUser, errorMessage, setErrorMessage }) {
 
   const navigate = useNavigate();
+
+  function handleErrors(err) {
+    switch (err) {
+      case 'Ошибка: 409':
+        setErrorMessage(ERROR_MESSAGES.EMAIL_IS_EXISTS_ALREADY)
+        break;
+      case 'Ошибка: 500':
+        setErrorMessage(ERROR_MESSAGES.ERROR_SIGNUP)
+        break;
+      default:
+        setErrorMessage(ERROR_MESSAGES.ERROR_SERVER)
+        console.log(err)
+    }
+  }
 
   async function register({ name, email, password }) {
     setLoading(true);
     try {
-      await mainApi.register(name, email, password)
+      const res = await mainApi.register(name, email, password)
+      if (res) {
+        localStorage.setItem('token', res.token);
+        mainApi.login(email, password)
+        const user = mainApi.getCurrentUser()
+        setCurrentUser(user);
+        const token = localStorage.getItem('token');
+        const res = await mainApi.checkToken(token)
+        setLoggedIn(true);
+        navigate(MOVIES, { replace: true })
+      }
       setLoading(false);
       setErrorMessage('');
       navigate(SIGN_IN, { replace: true });
     } catch (err) {
-      console.log(err)
-      setLoading(false);
+      handleErrors(err);
     } finally {
       setLoading(false);
     }

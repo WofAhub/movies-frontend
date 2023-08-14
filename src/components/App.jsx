@@ -152,10 +152,10 @@ function App() {
                 <Navigate to={MOVIES} replace />
               ) : (
                 <Login
+                  errorMessage={errorMessage}
                   setErrorMessage={setErrorMessage}
                   setLoggedIn={setLoggedIn}
                   setLoading={setLoading}
-                  setCurrentUser={setCurrentUser}
                 />
               )
             }
@@ -167,10 +167,11 @@ function App() {
                 <Navigate to={MOVIES} replace />
               ) : (
                 <Register
-                  setLoading={setLoading}
                   errorMessage={errorMessage}
                   setErrorMessage={setErrorMessage}
+                  setLoading={setLoading}
                   setLoggedIn={setLoggedIn}
+                  setCurrentUser={setCurrentUser}
                 />
               )
             }
@@ -217,6 +218,8 @@ function App() {
                 setLoading={setLoading}
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
                 logout={logOut}
               />
             }
