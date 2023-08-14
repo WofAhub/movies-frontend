@@ -6,7 +6,7 @@ import * as mainApi from '../utils/MainApi';
 // модули
 import AuthAndRegister from './AuthAndRegister';
 import useFormAndValidation from '../hooks/useFormAndValidation';
-import { ERROR_MESSAGES, MOVIES, SIGN_IN } from '../utils/constants/constants';
+import { ERROR_MESSAGES, MOVIES } from '../utils/constants/constants';
 import { EMAIL_PATTERT } from '../utils/constants/constants';
 
 function Register({ setLoading, setLoggedIn, setCurrentUser, errorMessage, setErrorMessage }) {
@@ -27,23 +27,27 @@ function Register({ setLoading, setLoggedIn, setCurrentUser, errorMessage, setEr
     }
   }
 
+  function handleAutoLogin({ email, password }) {
+    mainApi.login(email, password)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          setLoggedIn(true);
+          navigate(MOVIES, { replace: true })
+        }
+      }).catch((err) => {
+        handleErrors(err)
+      })
+  }
+
+
   async function register({ name, email, password }) {
     setLoading(true);
     try {
       const res = await mainApi.register(name, email, password)
       if (res) {
-        localStorage.setItem('token', res.token);
-        mainApi.login(email, password)
-        const user = mainApi.getCurrentUser()
-        setCurrentUser(user);
-        const token = localStorage.getItem('token');
-        const res = await mainApi.checkToken(token)
-        setLoggedIn(true);
-        navigate(MOVIES, { replace: true })
+        handleAutoLogin({ email, password })
       }
-      setLoading(false);
-      setErrorMessage('');
-      navigate(SIGN_IN, { replace: true });
     } catch (err) {
       handleErrors(err);
     } finally {

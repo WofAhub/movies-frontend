@@ -54,7 +54,7 @@ function Profile({ logout, setLoading, setCurrentUser, errorMessage, setErrorMes
       setLoading(false);
       showSuccessMessage()
     } catch (err) {
-      handleErrors(err)
+      handleErrors(err);
     } finally {
       setLoading(false);
     }
@@ -67,6 +67,7 @@ function Profile({ logout, setLoading, setCurrentUser, errorMessage, setErrorMes
   function turnOffEditMode() {
     setEditMode(false);
     resetForm();
+    setErrorMessage('');
   }
 
   // подтверждение
@@ -74,6 +75,7 @@ function Profile({ logout, setLoading, setCurrentUser, errorMessage, setErrorMes
     evt.preventDefault();
     updateUserInfo(values);
     turnOffEditMode();
+    setErrorMessage('');
   }
 
 
@@ -81,6 +83,7 @@ function Profile({ logout, setLoading, setCurrentUser, errorMessage, setErrorMes
     setUpdateMessage(true);
     setTimeout(() => setUpdateMessage(false), 2000);
   }
+
 
   return (
     <section className='profile profile_mediaScreen'>
@@ -136,7 +139,7 @@ function Profile({ logout, setLoading, setCurrentUser, errorMessage, setErrorMes
           <button type='button' onClick={logout} className='profile__button button'>Выйти из аккаунта</button>
         </div>
       </form>
-      <span>{errorMessage}</span>
+      <span className='searchForm__span'>{errorMessage}</span>
     </section>
   );
 };
