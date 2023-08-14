@@ -222,7 +222,9 @@ function App() {
           <Route
             path={PATH_404}
             element={
-              <NotFoundPage />
+              <NotFoundPage 
+                disabled={loading}
+              />
             }
           />
         </Routes>
