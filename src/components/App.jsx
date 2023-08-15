@@ -15,12 +15,12 @@ import NotFoundPage from './NotFoundPage';
 import SavedMovies from './SavedMovies';
 import Navigation from './Navigation';
 import NavTab from './NavTab';
-import Preloader from './Preloader';
 import { deleteFromLocalStorage } from '../utils/constants/constants';
 import {
   PATH_404, PROFILE, SAVED_MOVIES, MOVIES,
   SIGN_IN, SIGN_UP, BASE_ROUTE
 } from '../utils/constants/constants';
+import Preloader from './Preloader';
 
 function App() {
 
@@ -29,7 +29,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
 
   // -- сохраненные фильмы
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState(null);
 
   // -- служебное
   const [errorMessage, setErrorMessage] = useState('');
@@ -47,25 +47,45 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // проверка токена и вход
+  // проверка токена
   async function checkToken() {
-    setLoading(true);
     if (token) {
       try {
         const res = await mainApi.checkToken(token)
         if (res) {
           setLoggedIn(true);
-          setCurrentUser(res);
-          const savedMovies = await mainApi.getMovies()
-          setSavedMovies(savedMovies);
         }
       } catch (err) {
         console.log(`Ошибка в checkToken, в App: ${err.status}`);
-      } finally {
-        setLoading(false);
       }
     }
   }
+
+  // получаю и устанавливаю данные пользователя, когда проходит логин
+  useEffect(() => {
+    if (loggedIn) {
+      setLoading(true);
+      mainApi
+        .getCurrentUser()
+        .then((user) => {
+          setLoading(false);
+          setCurrentUser(user)
+        })
+      mainApi
+        .getMovies()
+        .then((res) => {
+          setSavedMovies(res);
+          JSON.parse(localStorage.get('savedMovies'));
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err.status}`);
+        })
+        .finally(() => {
+          setLoading(false);
+        })
+    }
+  }, [loggedIn]);
+
 
   // убираю сообщения об ошибках в логине и регистре, 
   //когда было соверешно перемещение по страницам
@@ -94,6 +114,7 @@ function App() {
       const savedMovie = await mainApi.saveMovie(movie);
       if (savedMovie) {
         setSavedMovies((movies) => [...movies, savedMovie]);
+        localStorage.setItem('savedMovies', JSON.stringify(savedMovie));
       }
     } catch (err) {
       console.log(err);
@@ -106,6 +127,7 @@ function App() {
     deleteFromLocalStorage('foundMoviesList')
     deleteFromLocalStorage('toggleCheckbox')
     deleteFromLocalStorage('searchQuery')
+    deleteFromLocalStorage('savedMovies')
 
     setLoggedIn(false);
     navigate(BASE_ROUTE, { replace: true });

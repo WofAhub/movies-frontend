@@ -38,7 +38,6 @@ function Login({ setLoggedIn, setLoading, errorMessage, setErrorMessage }) {
     try {
       const res = await mainApi.login(email, password)
       setLoading(false);
-      console.log(res, "Это res из login в App.jsx")
       localStorage.setItem('token', res.token);
       setLoggedIn(true);
       navigate(MOVIES, { replace: true });

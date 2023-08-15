@@ -7,15 +7,6 @@ import {
 } from './constants/constants';
 import checkAnswerFromServer from './functions/api';
 
-const getToken = () => {
-  const token = localStorage.getItem('token');
-  return {
-    Accept: "application/json",
-    Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json",
-  };
-};
-
 // регистрация
 export const register = (name, email, password) => {
   return fetch(`${BASE_URL}${SIGNUP}`, {
@@ -61,11 +52,32 @@ export const checkToken = (token) => {
     })
 };
 
+// получаю информацию о пользователе
+export const getCurrentUser = () => {
+  const token = localStorage.getItem('token');
+  return fetch(`${BASE_URL}${USERS_ME}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  })
+    .then((res) => {
+      return checkAnswerFromServer(res)
+    })
+};
+
 // редактирование информации о пользователе через попап Профиля
 export const editUserInfo = (data) => {
+  const token = localStorage.getItem('token');
   return fetch(`${BASE_URL}${USERS_ME}`, {
     method: 'PATCH',
-    headers: getToken(),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
     body: JSON.stringify({
       name: data.name,
       email: data.email
@@ -78,9 +90,14 @@ export const editUserInfo = (data) => {
 
 // получение фильмов
 export const getMovies = () => {
+  const token = localStorage.getItem('token');
   return fetch(`${BASE_URL}${MOVIES}`, {
     method: 'GET',
-    headers: getToken(),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
   })
     .then((res) => {
       return checkAnswerFromServer(res)
@@ -89,9 +106,15 @@ export const getMovies = () => {
 
 //удаляю фильмы из сохраненных
 export const deleteMovie = (id) => {
+  const token = localStorage.getItem('token');
+
   return fetch(`${BASE_URL}/movies/${id}`, {
     method: 'DELETE',
-    headers: getToken(),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
   })
     .then((res) => {
       return checkAnswerFromServer(res)
@@ -100,9 +123,14 @@ export const deleteMovie = (id) => {
 
 //сохраняю фильмы
 export const saveMovie = (movie) => {
+  const token = localStorage.getItem('token');
   return fetch(`${BASE_URL}${MOVIES}`, {
     method: 'POST',
-    headers: getToken(),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
     body: JSON.stringify(movie)
   })
     .then((res) => {
