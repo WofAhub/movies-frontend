@@ -75,7 +75,6 @@ function App() {
         .getMovies()
         .then((res) => {
           setSavedMovies(res);
-          JSON.parse(localStorage.get('savedMovies'));
         })
         .catch((err) => {
           console.log(`Ошибка: ${err.status}`);
@@ -114,7 +113,6 @@ function App() {
       const savedMovie = await mainApi.saveMovie(movie);
       if (savedMovie) {
         setSavedMovies((movies) => [...movies, savedMovie]);
-        localStorage.setItem('savedMovies', JSON.stringify(savedMovie));
       }
     } catch (err) {
       console.log(err);

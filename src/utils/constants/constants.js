@@ -101,3 +101,14 @@ export const LABELS_FOR_FORMS = {
   NAME_LABEL: 'Имя',
   PASSWORD_LABEL: 'Пароль'
 }
+
+// навигация
+export const navigationLinks = [{
+  id: 1,
+  path: '/movies',
+  label: 'Фильмы',
+}, {
+  id: 2,
+  path: '/saved-movies',
+  label: 'Сохраненные фильмы',
+}];
