@@ -56,7 +56,7 @@ function App() {
           setLoggedIn(true);
         }
       } catch (err) {
-        console.log(`Ошибка в checkToken, в App: ${err.status}`);
+        console.log(`Ошибка в checkToken, в App: ${err}`);
       }
     }
   }
@@ -77,7 +77,7 @@ function App() {
           setSavedMovies(res);
         })
         .catch((err) => {
-          console.log(`Ошибка: ${err.status}`);
+          console.log(`Ошибка: ${err}`);
         })
         .finally(() => {
           setLoading(false);
@@ -125,10 +125,9 @@ function App() {
     deleteFromLocalStorage('foundMoviesList')
     deleteFromLocalStorage('toggleCheckbox')
     deleteFromLocalStorage('searchQuery')
-    deleteFromLocalStorage('savedMovies')
 
     setLoggedIn(false);
-    navigate(BASE_ROUTE, { replace: true });
+    navigate(BASE_ROUTE);
   }
 
   return (

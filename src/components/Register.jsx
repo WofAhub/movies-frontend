@@ -36,7 +36,7 @@ function Register({ setLoading, setLoggedIn, errorMessage, setErrorMessage }) {
         if (res.token) {
           localStorage.setItem('token', res.token);
           setLoggedIn(true);
-          navigate(MOVIES, { replace: true })
+          navigate(MOVIES)
         }
       }).catch((err) => {
         handleErrors(err)
