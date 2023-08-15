@@ -44,6 +44,9 @@ function Profile({ logout, setLoading, setCurrentUser, errorMessage, setErrorMes
       case 'Ошибка: 500':
         setErrorMessage(ERROR_MESSAGES.UPDATE_ERROR)
         break;
+      case 'Ошибка: 429':
+        setErrorMessage(ERROR_MESSAGES.TO_MANY_QUERYS)
+        break;
       default:
         setErrorMessage(ERROR_MESSAGES.ERROR_SERVER)
         console.log(err)

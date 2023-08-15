@@ -47,42 +47,25 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // проверка токена
+  // проверка токена и вход
   async function checkToken() {
+    setLoading(true);
     if (token) {
       try {
         const res = await mainApi.checkToken(token)
-        const savedMovies = await mainApi.getMovies()
-        setSavedMovies(savedMovies);
         if (res) {
           setLoggedIn(true);
-          navigate({ replace: false });
+          setCurrentUser(res);
+          const savedMovies = await mainApi.getMovies()
+          setSavedMovies(savedMovies);
         }
       } catch (err) {
         console.log(`Ошибка в checkToken, в App: ${err.status}`);
+      } finally {
+        setLoading(false);
       }
     }
   }
-
-  // получаю и устанавливаю данные пользователя, когда проходит логин
-  useEffect(() => {
-    if (loggedIn) {
-      setLoading(true);
-      mainApi
-        .getCurrentUser()
-        .then((user) => {
-          setLoading(false);
-          setCurrentUser(user)
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err.status}`);
-        })
-        .finally(() => {
-          setLoading(false);
-        })
-    }
-  }, [loggedIn]);
-
 
   // убираю сообщения об ошибках в логине и регистре, 
   //когда было соверешно перемещение по страницам
