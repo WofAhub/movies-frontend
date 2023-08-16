@@ -1,5 +1,8 @@
+// --- база
 import React from "react";
 import { NavLink } from 'react-router-dom';
+
+// -- модули
 import Header from "./Header";
 
 function NavTab() {

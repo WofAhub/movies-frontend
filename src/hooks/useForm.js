@@ -1,18 +1,17 @@
-import { useState } from "react";
+import React from "react";
 
-const useForm = (initialState) => {
-  const [formValue, setFormValue] = useState(initialState);
+export default function useForm(initialValues = {}, initialIsValid = false) {
+  const [values, setValues] = React.useState(initialValues);
+  const [isValid, setIsValid] = React.useState(initialIsValid);
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
+  function handleChange(event) {
+    const input = event.target;
+    const name = input.name;
+    const value = input.type === 'checkbox' ? input.checked : input.value;
 
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
+    setValues((values) => ({ ...values, [name]: value }));
+    setIsValid(input.closest('form').checkValidity());
   }
 
-  return { formValue, handleChange };
+  return [values, isValid, handleChange];
 }
-
-export default useForm;

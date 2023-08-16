@@ -1,0 +1,13 @@
+.profile__buttons_editMode {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+@media screen and (max-width: 898px) {
+  .profile__buttons_editMode {
+  column-gap: 16px;
+  }
+}

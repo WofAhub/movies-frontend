@@ -1,0 +1,9 @@
+.button_authAndReg_error {
+  cursor: not-allowed;
+  background-color: #F4F4F4;
+  background-image: url(../../../../images/errorValidation.svg);
+}
+
+.button_authAndReg_error:hover {
+  background-color: #F4F4F4;
+}

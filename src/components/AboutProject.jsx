@@ -1,4 +1,7 @@
+// --- база
 import React from 'react';
+
+// -- модули
 import Landing from './Landing';
 
 function AboutProject() {

@@ -1,0 +1,24 @@
+.notFoundMessage {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  right: 30%;
+  display: block;
+  height: 20px;
+  color: #EE3465;
+  text-align: center;
+
+  font-size: calc(12px + 6 * (100vw / 1280));
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .notFoundMessage {
+    font-size: calc(12px + (6 + 6 * 0.7) * ((100vw -320px) / 1280));
+  }
+}

@@ -1,0 +1,11 @@
+.authAndRegisterImputs__input_error {
+  color: #EE3465;
+  border-color: #EE3465;
+}
+
+.authAndRegisterImputs__input_error:focus {
+  border-color: #EE3465;
+  background-image: url(../../../../images/Error.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}

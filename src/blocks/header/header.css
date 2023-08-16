@@ -3,6 +3,8 @@
 
   width: 100%;
 
+  visibility: visible;
+
   background: rgba(250, 250, 250, 0.01);
   backdrop-filter: blur(7.5px);
 

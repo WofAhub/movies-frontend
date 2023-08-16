@@ -1,8 +1,9 @@
+// --- база
 import React from 'react';
 
-function Preloader() {
+function Preloader({ loading }) {
   return (
-    <section className='preloader'>
+    <section className={loading ? 'preloader preloader_active' : 'preloader'}>
       <span
         className='preloader__objects'>
       </span>
